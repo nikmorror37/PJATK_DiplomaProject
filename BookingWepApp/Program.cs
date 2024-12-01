@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
@@ -17,12 +18,16 @@ namespace BookingWepApp
                 var services = scope.ServiceProvider;
                 try
                 {
-                    var context = services.GetRequiredService<ApplicationDbContext>();
+                    // Получаем MongoDbContext из контейнера DI
+                    var mongoDbContext = services.GetRequiredService<MongoDbContext>();
+
+                    // Инициализируем тестовые данные
+                    mongoDbContext.SeedData();
                 }
                 catch (Exception ex)
                 {
                     var logger = services.GetRequiredService<ILogger<Program>>();
-                    logger.LogError(ex, "Произошла ошибка при заполнении базы данных.");
+                    logger.LogError(ex, "Error with initialization MongoDB.");
                 }
             }
             host.Run();

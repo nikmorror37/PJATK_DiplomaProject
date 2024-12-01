@@ -40,19 +40,19 @@ namespace BookingWepApp.Areas.Identity.Pages.Account
         public class InputModel
         {
             [Required]
-            [StringLength(25, ErrorMessage = "Логин должен содержать минимум {2} и максимум {1} символов.", MinimumLength = 3)]
-            [Display(Name = "Логин/имя пользователя")]
+            [StringLength(25, ErrorMessage = "The login must contain a minimum of {2} and a maximum of {1} characters.", MinimumLength = 3)]
+            [Display(Name = "Login/username")]
             public string Login { get; set; }
 
             [Required]
-            [StringLength(100, ErrorMessage = "Пароль должен содержать минимум {2} и максимум {1} символов.", MinimumLength = 6)]
+            [StringLength(100, ErrorMessage = "The password must contain a minimum of {2} and a maximum of {1} characters.", MinimumLength = 6)]
             [DataType(DataType.Password)]
-            [Display(Name = "Пароль")]
+            [Display(Name = "Password")]
             public string Password { get; set; }
 
             [DataType(DataType.Password)]
-            [Display(Name = "Подтверждение пароля")]
-            [Compare("Password", ErrorMessage = "Пароли не совпадают.")]
+            [Display(Name = "Password confirmation")]
+            [Compare("Password", ErrorMessage = "The passwords don't match.")]
             public string ConfirmPassword { get; set; }
         }
 
@@ -72,7 +72,7 @@ namespace BookingWepApp.Areas.Identity.Pages.Account
                 var result = await _userManager.CreateAsync(user, Input.Password);
                 if (result.Succeeded)
                 {
-                    _logger.LogInformation("Профиль пользователя успешно создан.");
+                    _logger.LogInformation("The user profile has been successfully created.");
                     await _signInManager.SignInAsync(user, isPersistent: false);
                     return LocalRedirect(returnUrl);
                 }

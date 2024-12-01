@@ -1,20 +1,20 @@
 ﻿using MongoDB.Driver;
 using BookingWepApp.Models;
+using Microsoft.Extensions.Configuration;
 using System;
 using System.Collections.Generic;
 
 namespace BookingWepApp.Data
 {
-    public class ApplicationDbContext
+    public class MongoDbContext
     {
         private readonly IMongoDatabase _database;
 
-        public ApplicationDbContext()
+        public MongoDbContext(IConfiguration configuration)
         {
-            // Подключение к MongoDB
-            var connectionString = "mongodb://localhost:27017"; // Локальный адрес MongoDB сервера
-            var client = new MongoClient(connectionString);
-            _database = client.GetDatabase("BookingOne"); // Имя базы данных
+            // Инициализация клиента MongoDB с использованием строки подключения из appsettings.json
+            var client = new MongoClient(configuration.GetConnectionString("MongoDbConnection"));
+            _database = client.GetDatabase("BookingDatabase"); // Укажите имя базы данных
         }
 
         // Коллекции MongoDB для каждой сущности
@@ -22,55 +22,52 @@ namespace BookingWepApp.Data
         public IMongoCollection<Room> Rooms => _database.GetCollection<Room>("Rooms");
         public IMongoCollection<Booking> Bookings => _database.GetCollection<Booking>("Bookings");
         public IMongoCollection<Payment> Payments => _database.GetCollection<Payment>("Payments");
-        public IMongoCollection<ApplicationUser> ApplicationUsers => _database.GetCollection<ApplicationUser>("ApplicationUsers");
+        public IMongoCollection<ApplicationUser> Users => _database.GetCollection<ApplicationUser>("Users");
 
-        // Метод для заполнения базы данных тестовыми данными
+        // Метод для инициализации тестовых данных
         public void SeedData()
         {
-            // Проверяем, если данные уже существуют
-            if (Hotels.CountDocuments(_ => true) == 0)
+            // Проверяем, если данные уже существуют в коллекции Hotels
+            if (Hotels.EstimatedDocumentCount() == 0)
             {
                 // Добавляем тестовые отели
                 var hotels = new List<Hotel>
                 {
                     new Hotel
                     {
-                        Id = 1,
-                        Name = "Ритц Отель Париж",
+                        Name = "Ritz Hotel Paris",
                         Website = "https://www.ritzparis.com/en-GB",
-                        Address = "15 Вандомская площадь",
+                        Address = "15 Pl. Vendome",
                         ZipCode = "75001",
-                        City = "Париж",
-                        Country = "Франция",
-                        Description = "Отель Ritz Paris расположен в Париже, в 500 метрах от Оперы Гарнье. К услугам гостей несколько баров и ресторанов, сад и бизнес-центр.",
+                        City = "Paris",
+                        Country = "France",
+                        Description = "Hotel Ritz is located in Paris, 500 meters from the Opera Garnier. It offers several bars and restaurants, a garden and a business center.",
                         Stars = 5,
                         DistanceFromCenter = 8.3,
                         ImageUrl = "~/pictures/hotels/hotel1.jpg"
                     },
                     new Hotel
                     {
-                        Id = 2,
-                        Name = "Коринтия Отель Лондон",
+                        Name = "Corinthia Hotel London",
                         Website = "https://www.corinthia.com/london/",
-                        Address = "Уайтхолл Плейс",
+                        Address = "Whitehall Pl.",
                         ZipCode = "SW1A 2BD",
-                        City = "Лондон",
-                        Country = "Великобритания",
-                        Description = "Роскошный отель Corinthia расположен в одном из самых престижных районов Лондона, в нескольких шагах от Трафальгарской площади и Уайтхолла.",
+                        City = "London",
+                        Country = "Great Britain",
+                        Description = "The luxurious Corinthia Hotel is located in one of London's most prestigious neighborhoods, steps from Trafalgar Square and Whitehall.",
                         Stars = 5,
                         DistanceFromCenter = 1.6,
                         ImageUrl = "~/pictures/hotels/hotel2.jpg"
                     },
                     new Hotel
                     {
-                        Id = 3,
-                        Name = "Леонардо Отель Амстердам",
+                        Name = "Leonardo Hotel Amsterdam",
                         Website = "https://www.leonardo-hotels.com/amsterdam/leonardo-hotel-amsterdam-city-center/",
-                        Address = "Тессельшадестраат 23",
+                        Address = "Tesselschadestraat 23",
                         ZipCode = "1054 ET",
-                        City = "Амстердам",
-                        Country = "Нидерланды",
-                        Description = "Почувствуйте сущность Амстердама в отеле Leonardo Hotel Amsterdam City Center.",
+                        City = "Amsterdam",
+                        Country = "Netherlands",
+                        Description = "Experience the essence of Amsterdam at the Leonardo Hotel Amsterdam City Center.",
                         Stars = 4,
                         DistanceFromCenter = 1.6,
                         ImageUrl = "~/pictures/hotels/hotel3.jpg"
@@ -83,10 +80,10 @@ namespace BookingWepApp.Data
                 var random = new Random();
                 var roomDescriptionArray = new[]
                 {
-                    "Традиционно оформленный номер с телевизором, принадлежностями для чая/кофе и собственной душевой.",
-                    "Двухместный номер с 1 кроватью, кондиционером, телевизором с плоским экраном, телефоном с прямым набором номера, высокоскоростным Wi-Fi, феном и сейфом. В современной ванной комнате установлен душ с сильным напором воды.",
-                    "В этом номере есть спутниковое телевидение, принадлежности для чая/кофе, фен и собственная ванная комната.",
-                    "Трехместный номер с кондиционером, электрическим чайником, бесплатным Wi-Fi и феном."
+                    "Traditionally decorated room with TV, tea/coffee making facilities and en-suite shower room.",
+                    "Double room with 1 bed, air conditioning, flat-screen TV, direct-dial telephone, high-speed Wi-Fi, hairdryer and safe. The modern bathroom has a power shower.",
+                    "This room has satellite TV, tea/coffee making facilities, a hairdryer and a private bathroom.",
+                    "Triple room with air conditioning, electric kettle, free Wi-Fi and hairdryer."
                 };
                 var numberOfBedsArray = new[] { 1, 1, 2, 3 };
                 var capacityArray = new[] { 1, 2, 2, 3 };
@@ -106,14 +103,13 @@ namespace BookingWepApp.Data
 
                     rooms.Add(new Room
                     {
-                        Id = i + 1,
                         RoomType = (RoomType)roomTypeIndex,
                         RoomPrice = (roomTypeIndex + 1) * 100 + randomHotelId * 50, // Цена зависит от типа номера и отеля
                         RoomDescription = roomDescriptionArray[roomTypeIndex],
                         NumberOfBeds = numberOfBedsArray[roomTypeIndex],
                         Capacity = capacityArray[roomTypeIndex],
                         RoomImageUrl = roomImagesArray[roomTypeIndex], // Правильное изображение для типа комнаты
-                        HotelId = randomHotelId
+                        HotelId = randomHotelId.ToString()
                     });
                 }
 

@@ -5,7 +5,7 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h4>Вы уверены, что хотите удалить номер @Model.Id?</h4>
+<h4>Are you sure you want to delete the room @Model.Id?</h4>
 <hr />
 <div>
     <dl class="row">
@@ -61,6 +61,6 @@
     
     <form asp-action="Delete">
         <input type="hidden" asp-for="Id" />
-        <input type="submit" value="Удалить" class="btn btn-danger" />
+        <input type="submit" value="Delete" class="btn btn-danger" />
     </form>
 </div>

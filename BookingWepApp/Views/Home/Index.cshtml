@@ -4,7 +4,7 @@
 
 @if (Model.Hotels.Count() == 0)
 {
-    <h2>Отели не найдены</h2>
+    <h2>No hotels found</h2>
 }
 else
 {
@@ -24,27 +24,27 @@ else
                                 </div>
                                 <div>
                                     <p>
-                                        @item.Stars - звёздочный
+                                        @item.Stars - star
                                     </p>
                                 </div>
                                 <div>
                                     <p>
-                                        Адрес: @item.ZipCode, @item.Country, @item.City, @item.Address
+                                        Address: @item.ZipCode, @item.Country, @item.City, @item.Address
                                     </p>
                                     <p>
-                                        Расстояние до центра: @item.DistanceFromCenter км.
+                                        Distance from city center: @item.DistanceFromCenter km.
                                     </p>
                                 </div>
                                 <div class="card-text text-justify">
                                     <p>@item.Description</p>
                                 </div>
                                 <div class="card-text">
-                                    <p>Ссылка на сайт: <a href="@item.Website">@item.Website</a></p>
+                                    <p>WEB URL: <a href="@item.Website">@item.Website</a></p>
                                 </div>
                             </div>
                         </div>
                         <div class="card-footer pt-0 pl-0 border-top-0 bg-white">
-                            <a asp-controller="HotelDetails" asp-action="HotelPage" asp-route-id="@item.Id" class="btn btn-success btn-lg btn-success float-right" style="background-color: rgb(35,110,170)">Забронировать номер в отеле</a>
+                            <a asp-controller="HotelDetails" asp-action="HotelPage" asp-route-id="@item.Id" class="btn btn-success btn-lg btn-success float-right" style="background-color: rgb(35,110,170)">Book the room in hotel</a>
                         </div>
                     </div>
                 </div>

@@ -10,13 +10,13 @@
     <div class="card">
         <div class="card-body">
             <h5 class="card-title">
-                Детали оплаты
+                Payment details
             </h5>
-            Стоимость за ночь: <label class="perNightPriceDisplay">@ViewBag.RoomPrice</label>&nbsp;
-            <label class="currentCurrency">BYN</label><br />
-            Количество ночей: @ViewBag.NumberOfNights<br />
-            Итоговая стоимость: <label class="totalPriceDisplayLabel">@ViewBag.TotalPrice</label>&nbsp;
-            <label class="currentCurrency">BYN</label><br />
+            Cost per night: <label class="perNightPriceDisplay">@ViewBag.RoomPrice</label>&nbsp;
+            <label class="currentCurrency">PLN</label><br />
+            Amount of nights: @ViewBag.NumberOfNights<br />
+            Total cost: <label class="totalPriceDisplayLabel">@ViewBag.TotalPrice</label>&nbsp;
+            <label class="currentCurrency">PLN</label><br />
             <input type="hidden" asp-for="@Model.Amount" class="totalPriceHidden" val="" style="width:100px" />
             <br />
             <h6 class="card-text font-weight-bold">Выберите способ оплаты:</h6>
@@ -39,19 +39,19 @@
                 }
                 <span asp-validation-for="@Model.Type" class="text-danger"></span><br />
 
-                <h6 class="card-text font-weight-bold text-primary">Имя, написанное на карте: </h6>
+                <h6 class="card-text font-weight-bold text-primary">Name on the card: </h6>
                 <input class="form-control col-3 payment-input" asp-for="@Model.CardHolderFirstName" />
                 <span asp-validation-for="@Model.CardHolderFirstName" class="text-danger"></span><br />
 
-                <h6 class="card-text font-weight-bold text-primary">Фамилия, написанная на карте: </h6>
+                <h6 class="card-text font-weight-bold text-primary">Surname on the card: </h6>
                 <input class="form-control col-3 payment-input" asp-for="@Model.CardHolderLastName" />
                 <span asp-validation-for="@Model.CardHolderLastName" class="text-danger"></span><br />
 
-                <h6 class="card-text font-weight-bold text-primary">Номер карты:</h6>
+                <h6 class="card-text font-weight-bold text-primary">Card number:</h6>
                 <input class="form-control col-3 payment-input" asp-for="@Model.CardNumber" />
                 <span asp-validation-for="@Model.CardNumber" class="text-danger"></span><br />
 
-                <h6 class="card-text font-weight-bold text-primary">Срок действия:</h6>
+                <h6 class="card-text font-weight-bold text-primary">Expiration date:</h6>
                 <select class="form-control col-3 payment-input" asp-for="@Model.ExpirationDate">
                     @{
                         var year = DateTime.Now.Year;
@@ -71,8 +71,8 @@
                 <input class="form-control col-3 payment-input" asp-for="@Model.CVV" />
                 <span asp-validation-for="@Model.CVV" class="text-danger"></span><br />
 
-                <button type="submit" class="btn btn-success" id="btn submit-btn" style="background-color: rgb(35,110,170)">Подтвердить</button>
-                <a asp-action="BookingConfirmation" asp-controller="HotelDetailsController" class="btn btn-danger">Отменить</a>
+                <button type="submit" class="btn btn-success" id="btn submit-btn" style="background-color: rgb(35,110,170)">Submit</button>
+                <a asp-action="BookingConfirmation" asp-controller="HotelDetailsController" class="btn btn-danger">Cancel</a>
             </div>
             <br />
         </div>

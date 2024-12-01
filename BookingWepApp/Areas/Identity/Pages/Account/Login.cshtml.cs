@@ -40,12 +40,12 @@ namespace BookingWepApp.Areas.Identity.Pages.Account
         public class InputModel
         {
             [Required]
-            [DisplayName("Логин/имя пользователя")]
+            [DisplayName("Login/name user")]
             public string Login { get; set; }
 
             [Required]
             [DataType(DataType.Password)]
-            [DisplayName("Пароль")]
+            [DisplayName("Password")]
             public string Password { get; set; }
         }
 
@@ -74,12 +74,12 @@ namespace BookingWepApp.Areas.Identity.Pages.Account
                 var result = await _signInManager.PasswordSignInAsync(Input.Login, Input.Password, true, lockoutOnFailure: false);
                 if (result.Succeeded)
                 {
-                    _logger.LogInformation("Пользователь авторизован.");
+                    _logger.LogInformation("User Authorized.");
                     return LocalRedirect(returnUrl);
                 }
                 else
                 {
-                    ModelState.AddModelError(string.Empty, "Неудачная попытка входа.");
+                    ModelState.AddModelError(string.Empty, "Failed entry attempt.");
                     return Page();
                 }
             }

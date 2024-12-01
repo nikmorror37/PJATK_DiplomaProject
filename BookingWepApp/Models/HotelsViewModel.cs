@@ -7,7 +7,7 @@ namespace BookingWepApp.Models
     public class HotelsViewModel
     {
         public IEnumerable<Hotel> Hotels { get; set; }
-        [Required(ErrorMessage = "Введите название отеля")]
+        [Required(ErrorMessage = "Enter hotel name")]
         public string SearchKeyword { get; set; }
     }
 }

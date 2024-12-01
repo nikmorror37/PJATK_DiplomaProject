@@ -1,57 +1,55 @@
-﻿using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Identity;
+﻿using BookingWepApp.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
-using BookingWepApp.Data;
-using BookingWepApp.Models;
+using MongoDB.Driver;
+using System.Collections.Generic;
 using System.Linq;
+using System.Security.Claims;
 using System.Threading.Tasks;
 
 namespace BookingWepApp.Controllers
 {
-    //помечаем, что использования методов этого контроллера необходимо сначала авторизоваться
     [Authorize]
     public class MyBookingsController : Controller
     {
-        //создаем экземпляр контекста
-        private readonly ApplicationDbContext _appContext;
-        //создаем экземпляр UserManager
-        private readonly UserManager<ApplicationUser> _userManager;
-        //текущий пользователь системы
-        [BindProperty]
-        public ApplicationUser CurrentUser { get; set; }
+        private readonly IMongoCollection<Booking> _bookingsCollection;
+        private readonly IMongoCollection<Room> _roomsCollection;
+        private readonly IMongoCollection<Hotel> _hotelsCollection;
 
-        //конструктор класса
-        //инициализируем контроллер
-        public MyBookingsController(ApplicationDbContext appContext, UserManager<ApplicationUser> userManager)
+        public MyBookingsController(IMongoClient mongoClient)
         {
-            _appContext = appContext;
-            _userManager = userManager;
+            var database = mongoClient.GetDatabase("BookingDb");
+            _bookingsCollection = database.GetCollection<Booking>("Bookings");
+            _roomsCollection = database.GetCollection<Room>("Rooms");
+            _hotelsCollection = database.GetCollection<Hotel>("Hotels");
         }
 
-        //открывает страницу MyBookings
-        public async Task<IActionResult> MyBookings()
+        // Метод для отображения всех бронирований текущего пользователя
+        public async Task<IActionResult> Index()
         {
-            //получаем текущего, авторизованного пользователя
-            CurrentUser = await _userManager.GetUserAsync(User);
-            //если он найден
-            if (CurrentUser != null)
+            // Получаем текущего пользователя
+            var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
+
+            // Находим все бронирования пользователя
+            var userBookings = await _bookingsCollection.Find(b => b.UserId == userId).ToListAsync();
+
+            // Дополняем данные о бронированиях информацией о номерах и отелях
+            foreach (var booking in userBookings)
             {
-                //передаем его в ViewBag представления
-                //ViewBag - объект, предоставляющий динамический доступ к объектам
-                ViewBag.User = CurrentUser;
+                // Ищем номер, связанный с бронированием
+                var room = await _roomsCollection.Find(r => r.Id == booking.RoomId).FirstOrDefaultAsync();
+                booking.Room = room;
+
+                // Ищем отель, связанный с номером
+                if (room != null)
+                {
+                    var hotel = await _hotelsCollection.Find(h => h.Id == room.HotelId).FirstOrDefaultAsync();
+                    booking.Room.Hotel = hotel;
+                }
             }
-            //получаем список бронирований пользователя
-            //у которых статус равен Accepted
-            var myBookingsList = await _appContext.Bookings
-                                    .Where(b => b.UserId == CurrentUser.Id && b.Status == Status.Accepted)
-                                    .Include(b => b.Payment)
-                                    .Where(p => p.Status == Status.Accepted)
-                                    .Include(b => b.Room)
-                                    .ThenInclude(r => r.Hotel)
-                                    .ToListAsync();
-            //открываем страницу
-            return View(myBookingsList);
+
+            // Возвращаем представление с данными о бронированиях
+            return View(userBookings);
         }
     }
 }

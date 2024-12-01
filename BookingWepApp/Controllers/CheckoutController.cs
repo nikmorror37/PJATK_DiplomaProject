@@ -2,7 +2,7 @@
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
-using BookingWepApp.Data;
+using MongoDB.Driver;
 using BookingWepApp.Models;
 using System;
 using System.Linq;
@@ -11,155 +11,123 @@ using System.Threading.Tasks;
 
 namespace BookingWepApp.Controllers
 {
-    //помечаем, что использования методов этого контроллера необходимо сначала авторизоваться
     [Authorize]
     public class CheckoutController : Controller
     {
-        //создаем экземпляр контекста
-        private readonly ApplicationDbContext _appContext;
-        //создаем экземпляр UserManager
+        private readonly IMongoCollection<Booking> _bookingsCollection;
+        private readonly IMongoCollection<Payment> _paymentsCollection;
+        private readonly IMongoCollection<ApplicationUser> _usersCollection;
+        private readonly IMongoCollection<Hotel> _hotelsCollection;
+        private readonly IMongoCollection<Room> _roomsCollection;
         private readonly UserManager<ApplicationUser> _userManager;
 
-        //конструктор класса
-        //инициализируем контроллер
-        public CheckoutController(ApplicationDbContext appContext,
-            UserManager<ApplicationUser> userManager)
+        public CheckoutController(IMongoClient mongoClient, UserManager<ApplicationUser> userManager)
         {
-            _appContext = appContext;
+            var database = mongoClient.GetDatabase("BookingDb");
+            _bookingsCollection = database.GetCollection<Booking>("Bookings");
+            _paymentsCollection = database.GetCollection<Payment>("Payments");
+            _usersCollection = database.GetCollection<ApplicationUser>("Users");
+            _hotelsCollection = database.GetCollection<Hotel>("Hotels");
+            _roomsCollection = database.GetCollection<Room>("Rooms");
             _userManager = userManager;
         }
 
-        //открываем страницу Checkout (оплата)
         public async Task<IActionResult> Checkout()
         {
-            //берем данные авторизованного пользователя
             var claimsIdentity = (ClaimsIdentity)User.Identity;
-            //получаем удостоверение пользователя по имени
             var identityClaim = claimsIdentity.FindFirst(ClaimTypes.NameIdentifier);
-            //создаем новое бронирование
-            var booking = new Booking()
+
+            var booking = new Booking
             {
-                //задаем все поля со страницы
-                RoomId = Convert.ToInt32(HttpContext.Session.GetInt32("roomId")),
-                CheckIn = Convert.ToDateTime((HttpContext.Session.GetString("CheckInDate"))),
-                CheckOut = Convert.ToDateTime((HttpContext.Session.GetString("CheckOutDate"))),
+                RoomId = HttpContext.Session.GetString("roomId"),
+                CheckIn = Convert.ToDateTime(HttpContext.Session.GetString("CheckInDate")),
+                CheckOut = Convert.ToDateTime(HttpContext.Session.GetString("CheckOutDate")),
                 Status = Status.Pending,
                 UserId = identityClaim.Value
             };
-            //добавляем бронирование в БД
-            _appContext.Bookings.Add(booking);
-            //сохраняем
-            await _appContext.SaveChangesAsync();
-            //кладем в ViewBag представления данные о стоимости номера
-            ViewBag.RoomPrice = decimal.Round(
-                _appContext.Rooms
-                .Where(r => r.Id == booking.RoomId)
-                .Select(r => r.RoomPrice)
-                .FirstOrDefault(), 2, MidpointRounding.AwayFromZero
-                );
-            //кладем в ViewBag представления данные о количество ночей
-            ViewBag.NumberOfNights = Convert.ToDecimal((booking.CheckOut - booking.CheckIn).TotalDays);
-            //кладем в ViewBag представления данные об итоговой стоимости бронирования
-            ViewBag.TotalPrice = decimal.Round(ViewBag.RoomPrice * ViewBag.NumberOfNights, 2, MidpointRounding.AwayFromZero);
-            //сохраняем ID бронирования в рамках текущей пользовательской сессии
-            HttpContext.Session.SetInt32("bookingId", booking.Id);
-            //открываем страницу
+
+            await _bookingsCollection.InsertOneAsync(booking);
+
+            var room = await _roomsCollection.Find(r => r.Id == booking.RoomId).FirstOrDefaultAsync();
+            var roomPrice = room.RoomPrice;
+            var numberOfNights = (booking.CheckOut - booking.CheckIn).TotalDays;
+            var totalPrice = decimal.Round(roomPrice * (decimal)numberOfNights, 2);
+
+            ViewBag.RoomPrice = roomPrice;
+            ViewBag.NumberOfNights = numberOfNights;
+            ViewBag.TotalPrice = totalPrice;
+
+            HttpContext.Session.SetString("bookingId", booking.Id);
+
             return View();
         }
 
-        //httpPost помечает метод, который предназначен для передачи данных
         [HttpPost]
-        //фильтр ValidateAntiForgeryToken предназначен для противодействия подделке межсайтовых запросов
         [AutoValidateAntiforgeryToken]
-        public IActionResult Checkout(Payment payment)
+        public async Task<IActionResult> Checkout(Payment payment)
         {
-            //если после выполнения операции ошибок не возникло
             if (ModelState.IsValid)
             {
-                //создаем новую оплату
-                var newPayment = new Payment()
-                {
-                    //задаем ей данные со страницы
-                    Status = Status.Pending,
-                    Date = DateTime.Now.Date,
-                    Amount = payment.Amount,
-                    Type = payment.Type,
-                    CardNumber = payment.CardNumber.Substring(12),
-                    CVV = payment.CVV.Substring(0, 1),
-                    ExpirationDate = payment.ExpirationDate,
-                    CardHolderFirstName = payment.CardHolderFirstName,
-                    CardHolderLastName = payment.CardHolderLastName
-                };
-                //добавляем оплату в БД
-                _appContext.Payments.Add(newPayment);
-                //сохраняем
-                _appContext.SaveChanges();
-                //переводим на действие PaymentCheckout
-                return RedirectToAction("PaymentCheckout", newPayment);
-            }
-            else
-            {
-                //если возникла ошибка, то остаемся на этой же странице
-                return View();
-            }
-        }
+                payment.Status = Status.Pending;
+                payment.Date = DateTime.Now;
+                payment.CardNumber = payment.CardNumber.Substring(12);
+                payment.CVV = payment.CVV.Substring(0, 1);
 
-        public IActionResult PaymentCheckout(Payment payment)
-        {
-            //если оплата существует
-            if (payment != null)
-            {
-                //получаем бронирование из БД по ID, который сохранили ранее
-                var bookingFromDb = _appContext.Bookings
-                    .FirstOrDefault(b => b.Id == HttpContext.Session.GetInt32("bookingId"));
-                //задаем статус бронированию
-                bookingFromDb.Status = Status.Accepted;
-                //указываем бронированию ID оплаты
-                bookingFromDb.PaymentId = payment.Id;
-                //сохраняем изменения
-                _appContext.Update(bookingFromDb);
-                //получаем оплату из БД
-                var paymentFromDb = _appContext.Payments.FirstOrDefault(p => p == payment);
-                //задаем ей статус
-                paymentFromDb.Status = Status.Accepted;
-                //сохраняем изменения
-                _appContext.Update(paymentFromDb);
-                //сохраняем БД
-                _appContext.SaveChanges();
-                //переводим на страницу BookingConfirmation
-                return RedirectToAction("BookingConfirmation", paymentFromDb);
+                await _paymentsCollection.InsertOneAsync(payment);
+
+                return RedirectToAction("PaymentCheckout", new { paymentId = payment.Id });
             }
-            //иначе, остаемся на этой же странице
+
             return View();
         }
 
-        //открываем страницу BookingConfirmation
-        public IActionResult BookingConfirmation(Payment payment)
+        public async Task<IActionResult> PaymentCheckout(string paymentId)
         {
-            //берем данные авторизованного пользователя
+            var payment = await _paymentsCollection.Find(p => p.Id == paymentId).FirstOrDefaultAsync();
+
+            if (payment != null)
+            {
+                var bookingId = HttpContext.Session.GetString("bookingId");
+                var booking = await _bookingsCollection.Find(b => b.Id == bookingId).FirstOrDefaultAsync();
+
+                booking.Status = Status.Accepted;
+                booking.PaymentId = payment.Id;
+
+                var updateBooking = Builders<Booking>.Update
+                    .Set(b => b.Status, booking.Status)
+                    .Set(b => b.PaymentId, booking.PaymentId);
+
+                await _bookingsCollection.UpdateOneAsync(b => b.Id == bookingId, updateBooking);
+
+                var updatePayment = Builders<Payment>.Update.Set(p => p.Status, Status.Accepted);
+                await _paymentsCollection.UpdateOneAsync(p => p.Id == payment.Id, updatePayment);
+
+                return RedirectToAction("BookingConfirmation", new { paymentId = payment.Id });
+            }
+
+            return View();
+        }
+
+        public async Task<IActionResult> BookingConfirmation(string paymentId)
+        {
             var claimsIdentity = (ClaimsIdentity)User.Identity;
-            //получаем удостоверение пользователя по имени
             var identityClaim = claimsIdentity.FindFirst(ClaimTypes.NameIdentifier);
-            //ищем самого пользователя
-            var user = _appContext.ApplicationUsers.FirstOrDefault(u => u.Id == identityClaim.Value);
-            //получаем ID бронирования, который сохранили ранее
-            var bookingId = HttpContext.Session.GetInt32("bookingId");
-            //получаем само бронирование
-            var booking = _appContext.Bookings.FirstOrDefault(b => b.Id == bookingId);
-            //ищем номер
-            var room = _appContext.Rooms.FirstOrDefault(r => r.Id == booking.RoomId);
-            //ищем отель
-            var hotel = _appContext.Hotels.FirstOrDefault(h => h.Id == room.HotelId);
-            //задаем для модели соответствующие данные
-            var bookingConfVM = new BookingConfirmationViewModel()
+
+            var user = await _usersCollection.Find(u => u.Id == identityClaim.Value).FirstOrDefaultAsync();
+            var bookingId = HttpContext.Session.GetString("bookingId");
+            var booking = await _bookingsCollection.Find(b => b.Id == bookingId).FirstOrDefaultAsync();
+            var room = await _roomsCollection.Find(r => r.Id == booking.RoomId).FirstOrDefaultAsync();
+            var hotel = await _hotelsCollection.Find(h => h.Id == room.HotelId).FirstOrDefaultAsync();
+
+            var bookingConfVM = new BookingConfirmationViewModel
             {
                 User = user,
-                Payment = payment,
+                Payment = await _paymentsCollection.Find(p => p.Id == paymentId).FirstOrDefaultAsync(),
                 Booking = booking,
                 Room = room,
-                Hotel = hotel,
+                Hotel = hotel
             };
-            //открываем страницу подтверждения
+
             return View(bookingConfVM);
         }
     }

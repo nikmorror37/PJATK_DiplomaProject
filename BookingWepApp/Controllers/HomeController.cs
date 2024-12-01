@@ -1,115 +1,116 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
-using BookingWepApp.Data;
 using BookingWepApp.Models;
+using BookingWepApp.Data;
 using System.Collections.Generic;
 using System.Linq;
+using MongoDB.Driver;
 
 namespace BookingWepApp.Controllers
 {
     public class HomeController : Controller
     {
-        //создаем экземпляр контекста
-        private readonly ApplicationDbContext _appContext;
+        // Экземпляр контекста MongoDB
+        private readonly MongoDbContext _mongoContext;
 
-        //конструктор класса
-        //инициализируем контроллер
-        public HomeController(ApplicationDbContext appContext)
-        {            
-            _appContext = appContext;
+        // Конструктор класса
+        // Инициализируем контроллер
+        public HomeController(MongoDbContext mongoContext)
+        {
+            _mongoContext = mongoContext;
         }
 
-        //страница Index
+        // Страница Index
         public IActionResult Index(bool clear)
         {
-            //создаем новую модель
+            // Создаем новую модель
             var hotelsViewModel = new HotelsViewModel()
             {
-                //кладем в нее список отелей с номерами
-                Hotels = _appContext.Hotels.Include(h => h.Rooms)
+                // Кладем в нее список отелей с номерами
+                Hotels = _mongoContext.Hotels
+                    .Find(_ => true)
+                    .ToList()
             };
-            //если в текущей сессии SearchKeyword не задан
+
+            // Если в текущей сессии SearchKeyword не задан
             if (HttpContext.Session.GetString("SearchKeyword") == null || clear)
             {
-                //то задаем ему значение пустой строки
+                // То задаем ему значение пустой строки
                 HttpContext.Session.SetString("SearchKeyword", string.Empty);
             }
-            //открываем страницу
+
+            // Открываем страницу
             return View(hotelsViewModel);
         }
 
-        //httpPost помечает метод, который предназначен для передачи данных
+        // httpPost помечает метод, который предназначен для передачи данных
         [HttpPost]
-        //фильтр ValidateAntiForgeryToken предназначен для противодействия подделке межсайтовых запросов
+        // Фильтр ValidateAntiForgeryToken предназначен для противодействия подделке межсайтовых запросов
         [AutoValidateAntiforgeryToken]
         public IActionResult Search(HotelsViewModel hotelsViewModel)
         {
-            //если ключевое слово поиска задано
+            // Если ключевое слово поиска задано
             if (hotelsViewModel.SearchKeyword != null)
             {
-                //сохраняем его в сессию
+                // Сохраняем его в сессию
                 HttpContext.Session.SetString("SearchKeyword", hotelsViewModel.SearchKeyword);
             }
 
-            //выполняем поиск отелей по ключевому слову
+            // Выполняем поиск отелей по ключевому слову
             var hotelListAfterSearch = GetHotelsBySearch(
                 HttpContext.Session.GetString("SearchKeyword"));
 
-            //создаем модель
+            // Создаем модель
             var newHotelViewModel = new HotelsViewModel
             {
-                //кладем в нее ключевое слово
+                // Кладем в нее ключевое слово
                 SearchKeyword = HttpContext.Session.GetString("SearchKeyword"),
-                //и список найденных отелей
+                // И список найденных отелей
                 Hotels = hotelListAfterSearch
             };
-            //вызываем следующий метод
+
+            // Вызываем следующий метод
             return Filter(newHotelViewModel);
         }
 
-        //httpPost помечает метод, который предназначен для передачи данных
+        // httpPost помечает метод, который предназначен для передачи данных
         [HttpPost]
         public IActionResult Filter(HotelsViewModel hotelsViewModel)
         {
-            //ищем отели, если в модели hotelsViewModel список отелей пуст
+            // Ищем отели, если в модели hotelsViewModel список отелей пуст
             var hotelListAfterSearch = hotelsViewModel.Hotels ??
                 GetHotelsBySearch(HttpContext.Session.GetString("SearchKeyword"));
-            //создаем модель
+
+            // Создаем модель
             var newHotelViewModel = new HotelsViewModel
             {
-                //кладем в нее ключевое слово
+                // Кладем в нее ключевое слово
                 SearchKeyword = HttpContext.Session.GetString("SearchKeyword"),
-                //и список найденных отелей
+                // И список найденных отелей
                 Hotels = hotelListAfterSearch
             };
-            //возвращаем страницу Index с новым списком отелей
+
+            // Возвращаем страницу Index с новым списком отелей
             return View("Index", newHotelViewModel);
         }
 
-        //ищет отели по названию
+        // Ищет отели по названию
         private IEnumerable<Hotel> GetHotelsBySearch(string hotelName)
         {
-            //если имя отеля задано
+            // Если имя отеля задано
             if (!string.IsNullOrEmpty(hotelName))
             {
-                //создаем модель
-                var hotelsViewModel = new HotelsViewModel
-                {
-                    //кладем в нее список отелей,
-                    //у которых название содержит строку hotelName
-                    Hotels = _appContext.Hotels
-                        .Include(h => h.Rooms)
-                        .Where(h => h.Name.Contains(hotelName))
-                        .ToList()
-                };
-                //возвращаем список найденных отелей
-                return hotelsViewModel.Hotels;
+                // Ищем отели, у которых название содержит строку hotelName
+                var hotels = _mongoContext.Hotels
+                    .Find(h => h.Name.ToLower().Contains(hotelName.ToLower()))
+                    .ToList();
+
+                return hotels;
             }
-            //если имя отеля не задано,
-            //возвращаем список всех отелей
-            return _appContext.Hotels
-                .Include(h => h.Rooms)
+
+            // Если имя отеля не задано, возвращаем список всех отелей
+            return _mongoContext.Hotels
+                .Find(_ => true)
                 .ToList();
         }
     }

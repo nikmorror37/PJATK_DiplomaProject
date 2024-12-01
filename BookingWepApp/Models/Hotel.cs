@@ -1,4 +1,5 @@
-﻿using System;
+﻿using MongoDB.Bson;
+using MongoDB.Bson.Serialization.Attributes;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
@@ -6,47 +7,60 @@ using System.ComponentModel.DataAnnotations;
 namespace BookingWepApp.Models
 {
     /// <summary>
-    /// Отель
+    /// Hotel
     /// </summary>
     public class Hotel
     {
-        [Key]
-        public int Id { get; set; }
+        [BsonId] // Указывает, что это поле является идентификатором MongoDB
+        [BsonRepresentation(BsonType.ObjectId)] // Автоматически преобразует строку в ObjectId
+        public string Id { get; set; }
+
         [Required]
-        [Display(Name = "Название отеля")]
+        [Display(Name = "Hotel name")]
         [StringLength(30)]
         public string Name { get; set; }
+
         [Required]
         [Url]
-        [DisplayName("Ссылка на сайт")]
+        [DisplayName("Website URL")]
         public string Website { get; set; }
+
         [Required]
-        [Display(Name = "Адрес")]
+        [Display(Name = "Address")]
         public string Address { get; set; }
+
         [Required]
-        [RegularExpression("^[a-zA-Z0-9- ]*$", ErrorMessage = "Допустимы только буквы, цифры, дефис (-) и пробел.")]
-        [Display(Name = "Индекс")]
+        [RegularExpression("^[a-zA-Z0-9- ]*$", ErrorMessage = "Only letters, numbers, hyphen (-), and spaces are allowed.")]
+        [Display(Name = "Postal Code")]
         public string ZipCode { get; set; }
+
         [Required]
-        [Display(Name = "Город")]
+        [Display(Name = "City")]
         public string City { get; set; }
+
         [Required]
-        [Display(Name = "Страна")]
+        [Display(Name = "Country")]
         public string Country { get; set; }
+
         [Required]
         [StringLength(255)]
-        [Display(Name = "Описание (макс. 255 символов)")]
+        [Display(Name = "Description (max. 255 characters)")]
         public string Description { get; set; }
+
         [Required]
         [Range(1, 5)]
-        [Display(Name = "Рейтинг")]
+        [Display(Name = "Stars")]
         public int Stars { get; set; }
+
         [Required]
         [Range(0, double.MaxValue)]
-        [Display(Name = "Расстояние до центра")]
+        [Display(Name = "Distance from City Center")]
         public double DistanceFromCenter { get; set; }
-        [DisplayName("Фотография отеля")]
+
+        [DisplayName("Hotel image")]
         public string ImageUrl { get; set; }
+
+        // Список связанных комнат
         public ICollection<Room> Rooms { get; set; }
     }
 }

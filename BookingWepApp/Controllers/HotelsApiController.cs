@@ -1,136 +1,102 @@
-﻿using BookingWepApp.Data;
-using BookingWepApp.Models;
+﻿using BookingWepApp.Models;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
+using MongoDB.Driver;
 using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
 
 namespace BookingWepApp.Controllers
 {
-    //Api контроллер для Swagger'а
     [Route("api/[controller]")]
-    //только так Swagger поймет, что данный контроллер содержит методы API
     [ApiController]
-    public class HotelsApiController : Controller
+    public class HotelsApiController : ControllerBase
     {
-        //создаем контекст
-        private readonly ApplicationDbContext _context;
+        private readonly IMongoCollection<Hotel> _hotelsCollection;
 
-        //инициализируем контроллер
-        public HotelsApiController(ApplicationDbContext context)
+        public HotelsApiController(IMongoClient mongoClient)
         {
-            _context = context;
+            var database = mongoClient.GetDatabase("BookingDb");
+            _hotelsCollection = database.GetCollection<Hotel>("Hotels");
         }
 
-        //метод GET
+        // Метод GET: api/HotelsApi
         [HttpGet]
         public async Task<ActionResult<IEnumerable<Hotel>>> Get()
         {
-            //возвращает список отелей
-            return await _context.Hotels.ToListAsync();
+            // Возвращает список всех отелей
+            var hotels = await _hotelsCollection.Find(_ => true).ToListAsync();
+            return Ok(hotels);
         }
 
-        //метод GET/id
+        // Метод GET: api/HotelsApi/{id}
         [HttpGet("{id}")]
-        public async Task<ActionResult<Hotel>> Get(int id)
+        public async Task<ActionResult<Hotel>> Get(string id)
         {
-            //ищем отель по ID
-            var item = await _context.Hotels.FindAsync(id);
-            //если отель не найден
-            if (item == null)
+            // Ищем отель по ID
+            var hotel = await _hotelsCollection.Find(h => h.Id == id).FirstOrDefaultAsync();
+            if (hotel == null)
             {
-                //ошибка 404
+                // Ошибка 404, если отель не найден
                 return NotFound();
             }
-            //иначе, возвращаем найденный отель
-            return item;
+            return Ok(hotel);
         }
 
-        //метод POST
+        // Метод POST: api/HotelsApi
         [HttpPost]
         public async Task<ActionResult<Hotel>> Post(Hotel item)
         {
-            //добавляем отель в БД
-            _context.Hotels.Add(item);
-            //сохраняем
-            await _context.SaveChangesAsync();
-            //возвращаем статус 201
+            // Добавляем отель в коллекцию
+            await _hotelsCollection.InsertOneAsync(item);
+            // Возвращаем статус 201 Created
             return CreatedAtAction(
                 nameof(Get),
                 new { id = item.Id },
                 item);
         }
 
-        //метод PUT/id
+        // Метод PUT: api/HotelsApi/{id}
         [HttpPut("{id}")]
-        public async Task<ActionResult> Put(int id, Hotel item)
+        public async Task<ActionResult> Put(string id, Hotel item)
         {
-            //если ID не совпадаюи
+            // Проверяем совпадение ID
             if (id != item.Id)
             {
-                //ошибка
-                return BadRequest();
+                return BadRequest("ID in the URL does not match ID in the body.");
             }
-            //находим отель по ID
-            var foundItem = await _context.Hotels.FindAsync(id);
-            //если он не найден
-            if (foundItem == null)
+
+            // Ищем отель по ID
+            var result = await _hotelsCollection.ReplaceOneAsync(h => h.Id == id, item);
+            if (result.MatchedCount == 0)
             {
-                //ошибка 404
+                // Ошибка 404, если отель не найден
                 return NotFound();
             }
-            //иначе, применяем новые данные для отеля
-            foundItem.Name = item.Name;
-            foundItem.Stars = item.Stars;
-            foundItem.Address = item.Address;
-            foundItem.City = item.City;
-            foundItem.Country = item.Country;
-            foundItem.Description = item.Description;
-            foundItem.DistanceFromCenter = item.DistanceFromCenter;
-            foundItem.ZipCode = item.ZipCode;
-            //обрабатываем исключения
-            try
-            {
-                //сохраняем данные
-                await _context.SaveChangesAsync();
-            }
-            catch (DbUpdateConcurrencyException) when (!ItemExists(id))
-            {
-                //если возникла ошибка
-                return NotFound();
-            }
-            //иначе, статус 204
+
+            // Успешное обновление
             return NoContent();
         }
 
-        //метод DELETE/id
+        // Метод DELETE: api/HotelsApi/{id}
         [HttpDelete("{id}")]
-        public async Task<IActionResult> Delete(int id)
+        public async Task<IActionResult> Delete(string id)
         {
-            //ищем отель по ID
-            var item = await _context.Hotels.FindAsync(id);
-            //если отель не найден
-            if (item == null)
+            // Удаляем отель из коллекции
+            var result = await _hotelsCollection.DeleteOneAsync(h => h.Id == id);
+            if (result.DeletedCount == 0)
             {
-                //ошибка 404
+                // Ошибка 404, если отель не найден
                 return NotFound();
             }
-            //иначе, удаляем отель из БД
-            _context.Hotels.Remove(item);
-            //сохраняем
-            await _context.SaveChangesAsync();
-            //статус 204
+
+            // Успешное удаление
             return NoContent();
         }
-        
-        //проверяем, существует ли отель
-        private bool ItemExists(int id)
+
+        // Проверка существования отеля
+        private async Task<bool> ItemExists(string id)
         {
-            //ищем в БД отели по ID
-            //если есть хотя бы один, то возвращаем True,
-            //иначе - False
-            return _context.Hotels.Any(e => e.Id == id);
+            var count = await _hotelsCollection.CountDocumentsAsync(h => h.Id == id);
+            return count > 0;
         }
     }
 }

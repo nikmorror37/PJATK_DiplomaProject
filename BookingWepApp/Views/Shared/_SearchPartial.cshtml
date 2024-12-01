@@ -1,6 +1,6 @@
 ﻿@model BookingWepApp.Models.HotelsViewModel
 
-<h1 id="heading">Список отелей</h1>
+<h1 id="heading">List of hotels</h1>
 <br />
 
 <form asp-controller="Home" asp-action="Search" method="post" id="search-form" class="collapse">
@@ -8,10 +8,10 @@
     <div class="form-group">
         <div class="form-group">
             <div class="input-group mb-1">
-                <input asp-for="@Model.SearchKeyword" class="input-group-text bg-white form-control p-4 custom-file" id="search-input" type="text" autocomplete="off" placeholder="Поиск отеля по названию">
-                <button type="submit" class="btn btn-success" id="submit-btn" style="background-color: rgb(35, 110, 170)">Поиск</button>
+                <input asp-for="@Model.SearchKeyword" class="input-group-text bg-white form-control p-4 custom-file" id="search-input" type="text" autocomplete="off" placeholder="Search hotel by name">
+                <button type="submit" class="btn btn-success" id="submit-btn" style="background-color: rgb(35, 110, 170)">Search</button>
             </div>
-            <a asp-action="Index" asp-controller="Home" asp-route-clear="true" class="btn btn-success" style="background-color: rgb(35, 110, 170)">Очистить</a>
+            <a asp-action="Index" asp-controller="Home" asp-route-clear="true" class="btn btn-success" style="background-color: rgb(35, 110, 170)">Clean</a>
         </div>
     </div>
 </form>

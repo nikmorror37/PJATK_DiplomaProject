@@ -2,177 +2,130 @@
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.Rendering;
-using Microsoft.EntityFrameworkCore;
-using BookingWepApp.Data;
+using MongoDB.Driver;
 using BookingWepApp.Models;
+using Microsoft.AspNetCore.Mvc.Rendering;
 
 namespace BookingWepApp.Controllers
 {
-    //данная строка позволяет установить права доступа
-    //здесь мы помечаем, что доступ ко всем методам этого контроллера имеет только Admin
     [Authorize(Roles = "Admin")]
     public class AdminRoomsController : Controller
     {
-        //создаем экземпляр контекста
-        private readonly ApplicationDbContext _context;
+        private readonly IMongoCollection<Room> _roomsCollection;
+        private readonly IMongoCollection<Hotel> _hotelsCollection;
 
-        //конструктор класса
-        //инициализируем контроллер
-        public AdminRoomsController(ApplicationDbContext context)
+        public AdminRoomsController(IMongoClient mongoClient)
         {
-            _context = context;
+            var database = mongoClient.GetDatabase("BookingDb");
+            _roomsCollection = database.GetCollection<Room>("Rooms");
+            _hotelsCollection = database.GetCollection<Hotel>("Hotels");
         }
 
-        //открывает страницу Index
-        //но здесь передаем в качестве параметра ID номера
-        public async Task<IActionResult> Index(int? id)
+        public async Task<IActionResult> Index(string id)
         {
-            //создаем список всех номеров
-            var applicationDbContext = _context.Rooms.Include(r => r.Hotel);
-            //если ID задан
-            if (id != null)
+            var roomsQuery = _roomsCollection.AsQueryable();
+
+            if (!string.IsNullOrEmpty(id))
             {
-                //то фильтруем список номеров по ID
-                applicationDbContext = _context.Rooms.Where(r => r.Id == id).Include(r => r.Hotel);
+                roomsQuery = roomsQuery.Where(r => r.Id == id);
             }
-            //открываем страницу и передаем в нее список номеров
-            return View(await applicationDbContext.ToListAsync());
+
+            var rooms = await _roomsCollection.Find(_ => true).ToListAsync();
+            return View(rooms);
         }
 
-        //октрывает страницу Create
-        public IActionResult Create()
+        public async Task<IActionResult> Create()
         {
-            //передаем в данные представления список отелей для привязки к выпадающему списку
-            ViewData["HotelId"] = new SelectList(_context.Hotels.ToList(), "Id", "Name");
-            //открываем страницу
+            var hotels = await _hotelsCollection.Find(_ => true).ToListAsync();
+            ViewData["HotelId"] = new SelectList(hotels, "Id", "Name");
             return View();
         }
 
-        //httpPost помечает метод, который предназначен для передачи данных
         [HttpPost]
-        //фильтр ValidateAntiForgeryToken предназначен для противодействия подделке межсайтовых запросов
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("RoomId,RoomType,RoomNumber,RoomPrice,RoomDescription,NumberOfBeds,Capacity,IsAvailable,RoomImageUrl,HotelId")] Room room)
+        public async Task<IActionResult> Create([Bind("RoomType,RoomPrice,RoomDescription,NumberOfBeds,Capacity,RoomImageUrl,HotelId")] Room room)
         {
-            //если после выполнения операции ошибок не возникло
             if (ModelState.IsValid)
             {
-                //говорим контексту, что мы добавили данные
-                _context.Add(room);
-                //сохраняем все изменения
-                await _context.SaveChangesAsync();
-                //переводим на страницу Index
+                await _roomsCollection.InsertOneAsync(room);
                 return RedirectToAction(nameof(Index));
             }
-            //если ошибки все же были
-            //в любом случае передаем список отелей для привязки к выпадающему списку
-            ViewData["HotelId"] = new SelectList(_context.Hotels.ToList(), "Id", "Name", room.HotelId);
-            //но остаемся на этой же странице
+
+            var hotels = await _hotelsCollection.Find(_ => true).ToListAsync();
+            ViewData["HotelId"] = new SelectList(hotels, "Id", "Name", room.HotelId);
             return View(room);
         }
 
-        //переводит на страницу Edit
-        //но при этом, выполняет поиск объекта в БД по заданному ID
-        public async Task<IActionResult> Edit(int? id)
+        public async Task<IActionResult> Edit(string id)
         {
-            //если ID не задан
-            if (id == null)
+            if (string.IsNullOrEmpty(id))
             {
-                //возвращаем страницу 404
                 return NotFound();
             }
-            //иначе, ищем номер в БД по ID
-            var room = await _context.Rooms.FindAsync(id);
-            //если номер не найден
+
+            var room = await _roomsCollection.Find(r => r.Id == id).FirstOrDefaultAsync();
             if (room == null)
             {
-                //возвращаем страницу 404
                 return NotFound();
             }
-            //передаем список отелей для привязки к выпадающему списку
-            ViewData["HotelId"] = new SelectList(_context.Hotels.ToList(), "Id", "Name", room.HotelId);
-            //переходим на страницу Edit
+
+            var hotels = await _hotelsCollection.Find(_ => true).ToListAsync();
+            ViewData["HotelId"] = new SelectList(hotels, "Id", "Name", room.HotelId);
             return View(room);
         }
 
-        //httpPost помечает метод, который предназначен для передачи данных
         [HttpPost]
-        //фильтр ValidateAntiForgeryToken предназначен для противодействия подделке межсайтовых запросов
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("RoomId,RoomType,RoomNumber,RoomPrice,RoomDescription,NumberOfBeds,Capacity,IsAvailable,RoomImageUrl,HotelId")] Room room)
+        public async Task<IActionResult> Edit(string id, [Bind("Id,RoomType,RoomPrice,RoomDescription,NumberOfBeds,Capacity,RoomImageUrl,HotelId")] Room room)
         {
-            //если после выполнения операции ошибок не возникло
             if (ModelState.IsValid)
             {
-                //ищем номер по ID
-                var item = _context.Rooms.Find(id);
-                //передаем в него новые данные со страницы
-                item.NumberOfBeds = room.NumberOfBeds;
-                item.RoomPrice = room.RoomPrice;
-                item.RoomDescription = room.RoomDescription;
-                item.Capacity = room.Capacity;
-                item.HotelId = room.HotelId;
-                item.RoomType = room.RoomType;
-                item.RoomImageUrl = room.RoomImageUrl;
-                //сохраняем
-                await _context.SaveChangesAsync();
-                //переводим на страницу Index
+                var update = Builders<Room>.Update
+                    .Set(r => r.RoomType, room.RoomType)
+                    .Set(r => r.RoomPrice, room.RoomPrice)
+                    .Set(r => r.RoomDescription, room.RoomDescription)
+                    .Set(r => r.NumberOfBeds, room.NumberOfBeds)
+                    .Set(r => r.Capacity, room.Capacity)
+                    .Set(r => r.RoomImageUrl, room.RoomImageUrl)
+                    .Set(r => r.HotelId, room.HotelId);
+
+                await _roomsCollection.UpdateOneAsync(r => r.Id == id, update);
                 return RedirectToAction(nameof(Index));
             }
-            //в любом случае передаем список отелей для привязки к выпадающему списку
-            ViewData["HotelId"] = new SelectList(_context.Hotels.ToList(), "Id", "Name", room.HotelId);
-            //остаемся на текущей странице
+
+            var hotels = await _hotelsCollection.Find(_ => true).ToListAsync();
+            ViewData["HotelId"] = new SelectList(hotels, "Id", "Name", room.HotelId);
             return View(room);
         }
 
-        //переводит на страницу Delete
-        //но при этом, выполняет поиск объекта в БД по заданному ID
-        public async Task<IActionResult> Delete(int? id)
+        public async Task<IActionResult> Delete(string id)
         {
-            //если ID не задан
-            if (id == null)
+            if (string.IsNullOrEmpty(id))
             {
-                //возвращаем страницу 404
                 return NotFound();
             }
-            //ищем номер по ID
-            var room = await _context.Rooms
-                .Include(r => r.Hotel)
-                .FirstOrDefaultAsync(m => m.Id == id);
-            //если номер не найден
+
+            var room = await _roomsCollection.Find(r => r.Id == id).FirstOrDefaultAsync();
             if (room == null)
             {
-                //возвращаем страницу 404
                 return NotFound();
             }
-            //иначе, переходим на страницу Delete
+
             return View(room);
         }
 
-        //httpPost помечает метод, который предназначен для передачи данных
-        //говорим, что этот метод удаляет объект
         [HttpPost, ActionName("Delete")]
-        //фильтр ValidateAntiForgeryToken предназначен для противодействия подделке межсайтовых запросов
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> DeleteConfirmed(int id)
+        public async Task<IActionResult> DeleteConfirmed(string id)
         {
-            //ищем номер по ID
-            var room = await _context.Rooms.FindAsync(id);
-            //удаляем номер из БД
-            _context.Rooms.Remove(room);
-            //сохраняем
-            await _context.SaveChangesAsync();
-            //переводим на страницу Index
+            await _roomsCollection.DeleteOneAsync(r => r.Id == id);
             return RedirectToAction(nameof(Index));
         }
 
-        //метод для проверки существования номера
-        private bool RoomExists(int id)
+        private async Task<bool> RoomExists(string id)
         {
-            //если существует любой объект с заданным ID
-            //то возвращаем True, иначе, False
-            return _context.Rooms.Any(e => e.Id == id);
+            var count = await _roomsCollection.CountDocumentsAsync(r => r.Id == id);
+            return count > 0;
         }
     }
 }
