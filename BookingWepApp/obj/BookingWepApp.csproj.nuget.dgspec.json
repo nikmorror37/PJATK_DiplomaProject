@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\Nick\\Desktop\\Source\\BookingWepApp\\BookingWepApp.csproj": {}
+    "C:\\Users\\Nick\\Documents\\NBD_Project\\NBD_Project\\BookingWepApp\\BookingWepApp.csproj": {}
   },
   "projects": {
-    "C:\\Users\\Nick\\Desktop\\Source\\BookingWepApp\\BookingWepApp.csproj": {
+    "C:\\Users\\Nick\\Documents\\NBD_Project\\NBD_Project\\BookingWepApp\\BookingWepApp.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\Nick\\Desktop\\Source\\BookingWepApp\\BookingWepApp.csproj",
+        "projectUniqueName": "C:\\Users\\Nick\\Documents\\NBD_Project\\NBD_Project\\BookingWepApp\\BookingWepApp.csproj",
         "projectName": "BookingWepApp",
-        "projectPath": "C:\\Users\\Nick\\Desktop\\Source\\BookingWepApp\\BookingWepApp.csproj",
+        "projectPath": "C:\\Users\\Nick\\Documents\\NBD_Project\\NBD_Project\\BookingWepApp\\BookingWepApp.csproj",
         "packagesPath": "C:\\Users\\Nick\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\Nick\\Desktop\\Source\\BookingWepApp\\obj\\",
+        "outputPath": "C:\\Users\\Nick\\Documents\\NBD_Project\\NBD_Project\\BookingWepApp\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
@@ -91,6 +91,10 @@
             "Microsoft.VisualStudio.Web.CodeGeneration.Design": {
               "target": "Package",
               "version": "[3.1.5, )"
+            },
+            "MongoDB.Driver": {
+              "target": "Package",
+              "version": "[3.0.0, )"
             },
             "Swashbuckle.AspNetCore": {
               "target": "Package",
