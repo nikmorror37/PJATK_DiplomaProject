@@ -1,0 +1,90 @@
+﻿@using BookingWepApp.Controllers;
+@using BookingWepApp.Models.Infrastructure;
+@model BookingWepApp.Models.Hotel
+@{
+    var imageUrl = Model.ImageUrl;
+}
+
+<div>
+    <div class="card mb-4 border-0">
+        <h2>
+            @Model.Stars - звёздочный отель @Model.Name
+        </h2>
+    </div>
+</div>
+
+<div class="card-deck">
+            <div class="card mt-4">
+                <p class="card-body text-justify">
+                    @Model.Description
+                </p>
+            </div>
+        </div>
+
+<form asp-controller="HotelDetails" asp-action="SearchRooms" method="post" id="search-form" class="collapse">
+    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+    <div class="form-group">
+        <div class="form-group">
+            <div class="input-group mb-1">
+                <input type="date" id="checkInDate" name="checkInDate" placeholder="Дата заселения" min="@DateTime.Today.ToString("yyyy-MM-dd")"/>
+                <input type="date" id="checkOutDate" name="checkOutDate" placeholder="Дата выселения" min="@DateTime.Today.ToString("yyyy-MM-dd")"/>
+                <button type="submit" class="btn btn-success" id="submit-btn" style="background-color: rgb(35, 110, 170)">Найти свободные номера</button>
+            </div>
+            <p>
+                @if (!string.IsNullOrEmpty(ViewBag.Error))
+                {
+                    @Html.Label("error", (string)ViewBag.Error, new { @class = "alert alert-danger" })
+                }
+            </p>
+        </div>
+    </div>
+</form>
+
+@if (ViewBag.DataInfo == null)
+{
+    <h2>Задайте даты заселения и выселения, чтобы найти свободные номера.</h2>
+}
+else if (ViewBag.RoomsAvailable == null)
+{
+    <h2>К сожалению, свободных номеров в выбранный период нет.</h2>
+}
+else
+{
+<div class="d-flex container-hotel">
+    <div class="carousel-container">
+        <div class="border p-3 mt-3">
+            <table class="table table-striped">
+                <thead>
+                    <tr>
+                        <th>Тип номера</th>
+                        <th>Стоимость за ночь</th>
+                        <th>Свободно номеров</th>
+                        <th></th>
+                    </tr>
+                    @foreach (var pair in ViewBag.RoomsAvailable as List<RoomItem>)
+                    {
+                        <tr>
+                            <td>
+                                @RoomTypeDecoder.GetRoomTypeName(pair.RoomType)
+                            </td>
+                            <td class="mobile-room">
+                                @(pair.AvailableRooms)/@(pair.TotalRooms)
+                            </td>
+                            <td>
+                                    @if (pair.AvailableRooms == 0)
+                                    {
+                                        <p class="text-danger">Свободных номеров данного типа нет</p>
+                                    }
+                                    else
+                                    {
+                                        <a asp-action="BookRoom" asp-controller="HotelDetails" style="background-color: rgb(35, 110, 170)" asp-route-roomType="@pair.RoomType" asp-route-id="@Model.Id" class="btn btn-success">Забронировать</a>
+                                    }
+                            </td>
+                        </tr>
+                    }
+                </thead>
+            </table>
+        </div>
+    </div>
+</div>
+}

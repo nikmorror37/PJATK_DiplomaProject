@@ -1,0 +1,68 @@
+﻿@using BookingWepApp.Models.Infrastructure;
+@model IEnumerable<BookingWepApp.Models.Room>
+
+@{
+    ViewData["Title"] = "Номера";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="float-lg-right">
+    <a asp-action="Create" class="btn btn-success" style="background-color: rgb(35,110,170)">Добавить номер</a>
+</div>
+
+<h1>Номера</h1>
+
+<div class="table-responsive">
+    <table class="table table-hover">
+        <thead>
+            <tr>
+                <th class="mobile-toggle">
+                    @Html.DisplayNameFor(model => model.RoomType)
+                </th>
+                <th class="mobile-toggle">
+                    @Html.DisplayNameFor(model => model.RoomPrice)
+                </th>
+                <th class="mobile-toggle">
+                    @Html.DisplayNameFor(model => model.NumberOfBeds)
+                </th>
+                <th class="mobile-toggle">
+                    @Html.DisplayNameFor(model => model.Capacity)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Hotel.Name)
+                </th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        @RoomTypeDecoder.GetRoomTypeName(item.RoomType)
+                    </td>
+                    <td class="mobile-toggle">
+                        @Html.DisplayFor(modelItem => item.RoomPrice)
+                    </td>
+                    <td class="mobile-toggle">
+                        @Html.DisplayFor(modelItem => item.NumberOfBeds)
+                    </td>
+                    <td class="mobile-toggle">
+                        @Html.DisplayFor(modelItem => item.Capacity)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Hotel.Name)
+                    </td>
+                    <td class="btn-group mobile-toggle">
+                        <a asp-action="Edit" asp-route-id="@item.Id" class="btn btn-success" style="background-color: rgb(35,110,170)">Изменить</a>
+                        <a asp-action="Delete" asp-route-id="@item.Id" class="btn btn-success" style="background-color: rgb(35,110,170)">Удалить</a>
+                    </td>
+                    <td class="btn-group button-group-icons">
+                        <a asp-action="Edit" asp-route-id="@item.Id" class="btn btn-success" style="background-color: rgb(35,110,170)"></a>
+                        <a asp-action="Delete" asp-route-id="@item.Id" class="btn btn-success" style="background-color: rgb(35,110,170)"></a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>

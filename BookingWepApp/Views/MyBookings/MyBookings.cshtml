@@ -1,0 +1,68 @@
+﻿@using BookingWepApp.Models.Infrastructure;
+@model IEnumerable<BookingWepApp.Models.Booking>
+
+@{
+    ViewData["Title"] = "Мои бронирования";
+}
+
+<div class="card border-0">
+    <div class="card-header bg-white pt-0 border-0 h1">
+        Мои бронирования 
+    </div>
+</div>
+
+@foreach (var booking in @Model)
+{
+    <div class="card mt-2 mb-3">
+        <div class="card-body">
+            <h4 class="card-title d-flex justify-content-between align-items-center">
+                Бронирование #@booking.Id
+            </h4>
+
+            <div class="d-flex booking-container">
+                <div class="card booking-card">
+                    <img src=@Url.Content(booking.Room.RoomImageUrl) class="card-img" alt="Hotel Image">
+                </div>
+                <div class="card booking-card p-3">
+                    <h3 class="card-title ml-1 mb-2">@booking.Room.Hotel.Stars - звездочный отель @booking.Room.Hotel.Name</h3>
+                    <div class="card-text ml-1 mb-2">@booking.Room.Hotel.Address, @booking.Room.Hotel.ZipCode, @booking.Room.Hotel.City, @booking.Room.Hotel.Country</div>
+                    <div class="card-text ml-1 mb-2">
+                        <small class="text-muted">
+                            Расстояние до центра: @booking.Room.Hotel.DistanceFromCenter км.
+                        </small>
+                    </div>
+                    <div class="card-text ml-1 mb-2">
+                        <small class="text-muted text-justify">@booking.Room.Hotel.Description</small>
+                    </div>
+                </div>
+            </div>
+            <div class="d-flex booking-container">
+                <div class=" booking-card">
+                    <div class="list-group-item d-flex justify-content-between align-items-center">
+                        Дата заселения:
+                        <span style="color: rgb(35,110,170)">@booking.CheckIn.ToString("dddd, d MMMM yyyy", new System.Globalization.CultureInfo("ru-RU"))</span>
+                    </div>
+                    <div class="list-group-item d-flex justify-content-between align-items-center">
+                        Дата выселения:
+                        <span style="color: rgb(35,110,170)">@booking.CheckOut.ToString("dddd, d MMMM yyyy", new System.Globalization.CultureInfo("ru-RU"))</span>
+                    </div>
+                    <div class="list-group-item d-flex justify-content-between align-items-center">
+                        Тип номера:
+                        <span style="color: rgb(35,110,170)">@RoomTypeDecoder.GetRoomTypeName(booking.Room.RoomType)</span>
+                    </div>
+                </div>
+                <div class="booking-card">
+                    <div class="list-group-item d-flex justify-content-between align-items-center">
+                        Номер карты:
+                        <span style="color: rgb(35,110,170)">**** **** **** @booking.Payment.CardNumber</span>
+                    </div>
+                    <div class="list-group-item d-flex justify-content-between align-items-center">
+                        Сумма:
+                        <span style="color: rgb(35,110,170)">@booking.Payment.Amount.ToString("F") BYN</span>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+}

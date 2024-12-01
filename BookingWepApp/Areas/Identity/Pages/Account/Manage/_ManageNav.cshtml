@@ -1,0 +1,17 @@
+﻿@inject SignInManager<ApplicationUser> SignInManager
+@{
+    var hasExternalLogins = (await SignInManager.GetExternalAuthenticationSchemesAsync()).Any();
+}
+<ul class="nav nav-pills flex-column">
+    <li class="nav-item"><a class="nav-link @ManageNavPages.IndexNavClass(ViewContext)" id="profile" asp-page="./Index">Мои данные</a></li>
+    <li class="nav-item"><a class="nav-link" asp-action="MyBookings" asp-controller="MyBookings">Мои бронирования</a></li>
+</ul>
+@if (User.IsInRole("Admin"))
+{
+    <hr />
+    <ul class="nav nav-pills flex-column">
+        <li class="nav-item"><a class="nav-link" asp-action="Index" asp-controller="AdminHotels">Управление отелями</a></li>
+        <li class="nav-item"><a class="nav-link" asp-action="Index" asp-controller="AdminRooms">Управление номерами</a></li>
+    </ul>
+    <hr />
+}

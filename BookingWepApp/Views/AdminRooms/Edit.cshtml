@@ -1,0 +1,63 @@
+﻿@model BookingWepApp.Models.Room
+
+@{
+    ViewData["Title"] = "Редактирование номера";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h3>Редактирование номера @Model.Id</h3>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Edit">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="Id" />
+            <div class="form-group">
+                <label asp-for="RoomType" class="control-label"></label>
+                <select asp-for="RoomType" asp-items="Html.GetEnumSelectList<RoomType>()" class="form-control"></select>
+                <span asp-validation-for="RoomType" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="RoomPrice" class="control-label"></label>
+                <input asp-for="RoomPrice" class="form-control" />
+                <span asp-validation-for="RoomPrice" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="RoomDescription" class="control-label"></label>
+                <textarea asp-for="RoomDescription" class="form-control"></textarea>
+                <span asp-validation-for="RoomDescription" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="NumberOfBeds" class="control-label"></label>
+                <input asp-for="NumberOfBeds" class="form-control" />
+                <span asp-validation-for="NumberOfBeds" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Capacity" class="control-label"></label>
+                <input asp-for="Capacity" class="form-control" />
+                <span asp-validation-for="Capacity" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label class="control-label">Room image</label>
+                <select asp-for="RoomImageUrl" class="form-control">
+                    <option>~/pictures/ОдноместныйНомер.jpg</option>
+                    <option>~/pictures/ДвухместныйНомер.jpg</option>
+                    <option>~/pictures/ТрехместныйНомер.jpg</option>
+                    <option>~/pictures/twin.jpg</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label asp-for="Hotel" class="control-label"></label>
+                <select asp-for="HotelId" class="form-control" asp-items="ViewBag.HotelId"></select>
+                <span asp-validation-for="HotelId" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Сохранить" class="btn btn-primary" style="background-color: rgb(35,110,170)" />
+            </div>
+        </form>
+    </div>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

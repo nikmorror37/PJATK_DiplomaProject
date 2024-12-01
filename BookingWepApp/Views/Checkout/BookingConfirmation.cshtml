@@ -1,0 +1,72 @@
+﻿@using BookingWepApp.Models.Infrastructure;
+@model BookingWepApp.Models.BookingConfirmationViewModel
+
+@{
+    ViewData["Title"] = "Подтверждение бронирования";
+    var nightsCount = (Model.Booking.CheckOut - Model.Booking.CheckIn).Days;
+    var nightPriceChosenCurrency = (Model.Payment.Amount / nightsCount);
+}
+
+<div class="card">
+    <h5 class="card-header">Бронирование #@Model.Booking.Id</h5>
+    <div class="row no-gutters">
+        <div class="col-md-4">
+            <img src=@Url.Content(Model.Room.RoomImageUrl) class="card-img" alt="Hotel Image">
+        </div>
+        <div class="col-md-8">
+            <div class="card-body">
+                <h3 class="card-title">@Model.Hotel.Stars - звездочный отель @Model.Hotel.Name</h3>
+                <p class="card-text">Адрес: @Model.Hotel.ZipCode, @Model.Hotel.Country, @Model.Hotel.City, @Model.Hotel.Address</p>
+                <p class="card-text">
+                    <small class="text-muted">
+                        Расстояние до центра: @Model.Hotel.DistanceFromCenter км.
+                    </small>
+                </p>
+                <p class="card-text">
+                    <small class="text-muted">@Model.Hotel.Description</small>
+                </p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="row pl-3 pr-3">
+    <div class="col-sm-6 p-0">
+        <div class="card">
+            <div class="card-body">
+                <h4 class="card-title">Информация о бронировании</h4>
+                <ul class="list-group">
+                    <li class="list-group-item d-flex justify-content-between align-items-center">
+                        Количество ночей:
+                        <span style="color: rgb(35,110,170)">@nightsCount</span>
+                    </li>
+                    <li class="list-group-item d-flex justify-content-between align-items-center">
+                        Дата заселения:
+                        <span style="color: rgb(35,110,170)">@Model.Booking.CheckIn.ToString("dddd, MMMM d, yyyy", new System.Globalization.CultureInfo("ru-RU"))</span>
+                    </li>
+                    <li class="list-group-item d-flex justify-content-between align-items-center">
+                        Дата выселения:
+                        <span style="color: rgb(35,110,170)">@Model.Booking.CheckOut.ToString("dddd, MMMM d, yyyy", new System.Globalization.CultureInfo("ru-RU"))</span>
+                    </li>
+                    <li class="list-group-item d-flex justify-content-between align-items-center">
+                        Сумма:
+                        <span style="color: rgb(35,110,170)">@Model.Payment.Amount.ToString("F") BYN</span>
+                    </li>
+
+                    <li class="list-group-item d-flex justify-content-between align-items-center">
+                        Тип номера:
+                        <span style="color: rgb(35,110,170)">@RoomTypeDecoder.GetRoomTypeName(Model.Room.RoomType)</span>
+                    </li>
+                    <li class="list-group-item d-flex justify-content-between align-items-center">
+                        Стоимость за ночь:
+                        <span style="color: rgb(35,110,170)">@nightPriceChosenCurrency.ToString("F") BYN</span>
+                    </li>
+                    <li class="list-group-item d-flex justify-content-between align-items-center">
+                        Описание:
+                        <span style="color: rgb(35,110,170)">@Model.Room.RoomDescription</span>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
