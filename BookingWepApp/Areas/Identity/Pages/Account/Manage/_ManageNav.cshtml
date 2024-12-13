@@ -1,17 +1,31 @@
-﻿@inject SignInManager<ApplicationUser> SignInManager
+﻿@using System.Security.Claims
+@inject SignInManager<ApplicationUser> SignInManager
 @{
     var hasExternalLogins = (await SignInManager.GetExternalAuthenticationSchemesAsync()).Any();
 }
 <ul class="nav nav-pills flex-column">
-    <li class="nav-item"><a class="nav-link @ManageNavPages.IndexNavClass(ViewContext)" id="profile" asp-page="./Index">Мои данные</a></li>
-    <li class="nav-item"><a class="nav-link" asp-action="MyBookings" asp-controller="MyBookings">Мои бронирования</a></li>
+    <li class="nav-item"><a class="nav-link @ManageNavPages.IndexNavClass(ViewContext)" id="profile" asp-page="./Index">My info</a></li>
+    <li class="nav-item"><a class="nav-link" asp-action="MyBookings" asp-controller="MyBookings">My Bookings</a></li>
 </ul>
-@if (User.IsInRole("Admin"))
+<p>Is User Authenticated: @User.Identity.IsAuthenticated</p>
+<p>User Name: @User.Identity.Name</p>
+<p>All Claims:</p>
+<ul>
+    @foreach (var claim in User.Claims)
+    {
+        <li>@claim.Type: @claim.Value</li>
+    }
+</ul>
+
+@if (ViewBag.IsAdmin != null && ViewBag.IsAdmin)
 {
-    <hr />
+    <p>Admin user detected!</p>
     <ul class="nav nav-pills flex-column">
-        <li class="nav-item"><a class="nav-link" asp-action="Index" asp-controller="AdminHotels">Управление отелями</a></li>
-        <li class="nav-item"><a class="nav-link" asp-action="Index" asp-controller="AdminRooms">Управление номерами</a></li>
+        <li class="nav-item"><a class="nav-link" asp-action="Index" asp-controller="AdminHotels">Manage hotels</a></li>
+        <li class="nav-item"><a class="nav-link" asp-action="Index" asp-controller="AdminRooms">Manage rooms</a></li>
     </ul>
-    <hr />
+}
+else
+{
+    <p>No Admin Role detected</p>
 }

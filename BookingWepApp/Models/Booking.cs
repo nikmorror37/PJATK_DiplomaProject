@@ -12,6 +12,10 @@ namespace BookingWepApp.Models
         [BsonId]
         [BsonRepresentation(BsonType.ObjectId)]
         public string Id { get; set; }
+        
+        [BsonElement("UserId")]
+        [BsonRepresentation(BsonType.String)]
+        public string UserId { get; set; }
 
         [BsonElement("RoomId")]
         [BsonRepresentation(BsonType.ObjectId)]
@@ -29,9 +33,7 @@ namespace BookingWepApp.Models
         [BsonElement("Status")]
         public Status Status { get; set; }
 
-        [BsonElement("UserId")]
-        [BsonRepresentation(BsonType.ObjectId)]
-        public string UserId { get; set; }
+        
 
         [BsonIgnore]
         public ApplicationUser User { get; set; }

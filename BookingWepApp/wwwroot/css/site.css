@@ -63,3 +63,15 @@ body {
     white-space: nowrap;
     line-height: 60px;
 }
+
+.admin-panel-container {
+    text-align: center; /* Центрирование содержимого */
+    margin-top: 10px; /* Отступ сверху */
+    margin-bottom: 20px; /* Отступ снизу */
+}
+
+.admin-panel-title {
+    margin-bottom: 10px; /* Расстояние между заголовком и кнопками */
+    font-size: 1.5rem; /* Увеличение размера шрифта заголовка */
+    font-weight: bold; /* Полужирный текст */
+}

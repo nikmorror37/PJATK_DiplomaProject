@@ -2,7 +2,7 @@
 @model BookingWepApp.Models.BookingConfirmationViewModel
 
 @{
-    ViewData["Title"] = "Подтверждение бронирования";
+    ViewData["Title"] = "Booking confirmation";
     var nightsCount = (Model.Booking.CheckOut - Model.Booking.CheckIn).Days;
     var nightPriceChosenCurrency = (Model.Payment.Amount / nightsCount);
 }

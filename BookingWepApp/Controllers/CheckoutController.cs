@@ -32,35 +32,102 @@ namespace BookingWepApp.Controllers
             _userManager = userManager;
         }
 
+        //public async Task<IActionResult> Checkout()
+        //{
+        //    var claimsIdentity = (ClaimsIdentity)User.Identity;
+        //    var identityClaim = claimsIdentity.FindFirst(ClaimTypes.NameIdentifier);
+
+        //    var booking = new Booking
+        //    {
+        //        RoomId = HttpContext.Session.GetString("roomId"),
+        //        CheckIn = Convert.ToDateTime(HttpContext.Session.GetString("CheckInDate")),
+        //        CheckOut = Convert.ToDateTime(HttpContext.Session.GetString("CheckOutDate")),
+        //        Status = Status.Pending,
+        //        UserId = identityClaim.Value
+        //    };
+
+        //    await _bookingsCollection.InsertOneAsync(booking);
+
+        //    var room = await _roomsCollection.Find(r => r.Id == booking.RoomId).FirstOrDefaultAsync();
+        //    var roomPrice = room.RoomPrice;
+        //    var numberOfNights = (booking.CheckOut - booking.CheckIn).TotalDays;
+        //    var totalPrice = decimal.Round(roomPrice * (decimal)numberOfNights, 2);
+
+        //    ViewBag.RoomPrice = roomPrice;
+        //    ViewBag.NumberOfNights = numberOfNights;
+        //    ViewBag.TotalPrice = totalPrice;
+
+        //    HttpContext.Session.SetString("bookingId", booking.Id);
+
+        //    return View();
+        //}
+
         public async Task<IActionResult> Checkout()
         {
-            var claimsIdentity = (ClaimsIdentity)User.Identity;
-            var identityClaim = claimsIdentity.FindFirst(ClaimTypes.NameIdentifier);
-
-            var booking = new Booking
+            try
             {
-                RoomId = HttpContext.Session.GetString("roomId"),
-                CheckIn = Convert.ToDateTime(HttpContext.Session.GetString("CheckInDate")),
-                CheckOut = Convert.ToDateTime(HttpContext.Session.GetString("CheckOutDate")),
-                Status = Status.Pending,
-                UserId = identityClaim.Value
-            };
+                var claimsIdentity = (ClaimsIdentity)User.Identity;
+                var identityClaim = claimsIdentity.FindFirst(ClaimTypes.NameIdentifier);
 
-            await _bookingsCollection.InsertOneAsync(booking);
+                // Fetch session values
+                var roomId = HttpContext.Session.GetString("roomId");
+                var checkIn = HttpContext.Session.GetString("CheckInDate");
+                var checkOut = HttpContext.Session.GetString("CheckOutDate");
 
-            var room = await _roomsCollection.Find(r => r.Id == booking.RoomId).FirstOrDefaultAsync();
-            var roomPrice = room.RoomPrice;
-            var numberOfNights = (booking.CheckOut - booking.CheckIn).TotalDays;
-            var totalPrice = decimal.Round(roomPrice * (decimal)numberOfNights, 2);
+                // Validate session values
+                if (string.IsNullOrEmpty(roomId) || string.IsNullOrEmpty(checkIn) || string.IsNullOrEmpty(checkOut))
+                {
+                    throw new Exception("Session data is missing. RoomId, CheckInDate, or CheckOutDate is not set.");
+                }
 
-            ViewBag.RoomPrice = roomPrice;
-            ViewBag.NumberOfNights = numberOfNights;
-            ViewBag.TotalPrice = totalPrice;
+                // Fetch Room data
+                var room = await _roomsCollection.Find(r => r.Id == roomId).FirstOrDefaultAsync();
+                if (room == null)
+                {
+                    throw new Exception($"Room with ID '{roomId}' not found.");
+                }
 
-            HttpContext.Session.SetString("bookingId", booking.Id);
+                // Fetch Hotel data
+                var hotel = await _hotelsCollection.Find(h => h.Id == room.HotelId).FirstOrDefaultAsync();
+                if (hotel == null)
+                {
+                    throw new Exception($"Hotel associated with Room ID '{roomId}' not found.");
+                }
 
-            return View();
+                // Create Booking object
+                var booking = new Booking
+                {
+                    RoomId = room.Id,
+                    CheckIn = Convert.ToDateTime(checkIn),
+                    CheckOut = Convert.ToDateTime(checkOut),
+                    Status = Status.Pending,
+                    UserId = identityClaim.Value
+                };
+
+                // Insert Booking into the database
+                await _bookingsCollection.InsertOneAsync(booking);
+
+                // Calculate Total Price
+                var numberOfNights = (booking.CheckOut - booking.CheckIn).TotalDays;
+                var totalPrice = decimal.Round(room.RoomPrice * (decimal)numberOfNights, 2);
+
+                ViewBag.RoomPrice = room.RoomPrice;
+                ViewBag.NumberOfNights = numberOfNights;
+                ViewBag.TotalPrice = totalPrice;
+
+                HttpContext.Session.SetString("bookingId", booking.Id);
+
+                return View();
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message); // Log errors
+                return BadRequest("An error occurred while processing the booking.");
+            }
         }
+
+
+
 
         [HttpPost]
         [AutoValidateAntiforgeryToken]

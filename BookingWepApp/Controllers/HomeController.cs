@@ -5,6 +5,9 @@ using BookingWepApp.Data;
 using System.Collections.Generic;
 using System.Linq;
 using MongoDB.Driver;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.Extensions.DependencyInjection;
+using System.Threading.Tasks;
 
 namespace BookingWepApp.Controllers
 {
@@ -42,6 +45,34 @@ namespace BookingWepApp.Controllers
             // Открываем страницу
             return View(hotelsViewModel);
         }
+        public IActionResult Manage()
+        {
+            var isAdmin = User.Identity != null && User.Identity.Name == "admin";
+            ViewBag.IsAdmin = isAdmin; // Передаем флаг в представление
+            return View();
+        }
+
+
+        //[HttpGet]
+        //public async Task<IActionResult> AssignAdminRole()
+        //{
+        //	var userManager = HttpContext.RequestServices.GetRequiredService<UserManager<ApplicationUser>>();
+        //	var admin = await userManager.FindByNameAsync("admin");
+        //	if (admin != null)
+        //	{
+        //		var result = await userManager.AddToRoleAsync(admin, "Admin");
+        //		if (result.Succeeded)
+        //		{
+        //			return Content("Role Admin successfully assigned to user admin.");
+        //		}
+        //		else
+        //		{
+        //			return Content("Failed to assign role: " + string.Join(", ", result.Errors.Select(e => e.Description)));
+        //		}
+        //	}
+        //	return Content("Admin user not found.");
+        //}
+
 
         // httpPost помечает метод, который предназначен для передачи данных
         [HttpPost]

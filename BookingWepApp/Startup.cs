@@ -6,11 +6,13 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using BookingWepApp.Data;
 using BookingWepApp.Models;
-using System.Threading.Tasks;
+using Microsoft.OpenApi.Models;
 using System;
 using System.Globalization;
-using Microsoft.OpenApi.Models;
 using System.Linq;
+using System.Threading.Tasks;
+using MongoDB.Driver;
+using System.Security.Claims;
 
 namespace BookingWepApp
 {
@@ -25,35 +27,79 @@ namespace BookingWepApp
 
         public void ConfigureServices(IServiceCollection services)
         {
-            // Регистрация MongoDbContext
+            // Register MongoDbContext
             services.AddSingleton<MongoDbContext>();
+            services.AddSingleton<IMongoClient, MongoClient>(sp =>
+            {
+                var configuration = sp.GetRequiredService<IConfiguration>();
+                var connectionString = configuration.GetSection("MongoDbSettings:ConnectionString").Value;
+                return new MongoClient(connectionString);
+            });
 
-            // Настройка Identity с MongoDB
+            // Register MongoUserStore and MongoRoleStore
+            services.AddScoped<IUserStore<ApplicationUser>, MongoUserStore>();
+            services.AddScoped<IRoleStore<IdentityRole>, MongoRoleStore>();
+            services.AddScoped<IUserClaimsPrincipalFactory<ApplicationUser>, CustomUserClaimsPrincipalFactory>(); //new
+
+
+            //// Identity configuration for ApplicationUser with MongoDB
+            //services.AddIdentity<ApplicationUser, IdentityRole>()
+            //    .AddDefaultTokenProviders();
+
+            // Identity configuration for ApplicationUser with MongoDB
             services.AddIdentity<ApplicationUser, IdentityRole>()
-                .AddDefaultTokenProviders();
+                .AddDefaultTokenProviders()
+                .AddClaimsPrincipalFactory<UserClaimsPrincipalFactory<ApplicationUser, IdentityRole>>();
 
-            // Настройка сессий и кэша
+            services.Configure<IdentityOptions>(options =>
+            {
+                options.ClaimsIdentity.RoleClaimType = ClaimTypes.Role; // Укажите правильный тип для ролей
+            });
+
+            services.ConfigureApplicationCookie(options =>
+            {
+                options.Events.OnValidatePrincipal = async context =>
+                {
+                    var userManager = context.HttpContext.RequestServices.GetRequiredService<UserManager<ApplicationUser>>();
+                    var user = await userManager.GetUserAsync(context.Principal);
+                    if (user != null)
+                    {
+                        var roles = await userManager.GetRolesAsync(user);
+                        var identity = new ClaimsIdentity();
+                        foreach (var role in roles)
+                        {
+                            identity.AddClaim(new Claim(ClaimTypes.Role, role));
+                        }
+                        context.Principal.AddIdentity(identity);
+                    }
+                };
+            });
+
+
+
+            // Session configuration
             services.AddDistributedMemoryCache();
             services.AddSession();
 
-            // Добавление MVC, API и Swagger
+            // Add MVC, Razor Pages, and Swagger
             services.AddControllersWithViews();
+            services.AddRazorPages().AddRazorRuntimeCompilation();
             services.AddSwaggerGen(c =>
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "My API", Version = "v1" });
                 c.ResolveConflictingActions(apiDescriptions => apiDescriptions.First());
             });
-            services.AddRazorPages().AddRazorRuntimeCompilation();
         }
+
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env, IServiceProvider serviceProvider)
         {
-            // Установка культуры по умолчанию
+            // Set default culture
             var cultureInfo = new CultureInfo("en-US");
             CultureInfo.DefaultThreadCurrentCulture = cultureInfo;
             CultureInfo.DefaultThreadCurrentUICulture = cultureInfo;
 
-            // Конвейер обработки запросов
+            // Configure request pipeline
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
@@ -109,11 +155,33 @@ namespace BookingWepApp
             var admin = await userManager.FindByNameAsync(adminUserName);
             if (admin == null)
             {
-                var newAdmin = new ApplicationUser { UserName = adminUserName };
+                //var newAdmin = new ApplicationUser { UserName = adminUserName };
+                var newAdmin = new ApplicationUser
+                {
+                    UserName = adminUserName,
+                    FirstName = "Top",
+                    LastName = "Admin",
+                    Email = "admin@example.com"
+                };
+
                 var createAdminResult = await userManager.CreateAsync(newAdmin, adminPassword);
                 if (createAdminResult.Succeeded)
                 {
+                    // await userManager.AddToRoleAsync(newAdmin, "Admin");
+                    
                     await userManager.AddToRoleAsync(newAdmin, "Admin");
+
+                    // Explicitly add role claims
+                    var claims = new[]
+                    {
+                        new Claim(ClaimTypes.Name, adminUserName),
+                        new Claim(ClaimTypes.Role, "Admin")
+                    };
+
+                    foreach (var claim in claims)
+                    {
+                        await userManager.AddClaimAsync(newAdmin, claim);
+                    }
                 }
             }
         }

@@ -1,8 +1,10 @@
-﻿@using BookingWepApp.Models.Infrastructure;
+﻿@using BookingWepApp.Controllers;
+@using static BookingWepApp.Controllers.MyBookingsController;
+@using BookingWepApp.Models.Infrastructure;
 @model IEnumerable<BookingWepApp.Models.Booking>
 
 @{
-    ViewData["Title"] = "Мои бронирования";
+    ViewData["Title"] = "My Bookings";
 }
 
 <div class="card border-0">

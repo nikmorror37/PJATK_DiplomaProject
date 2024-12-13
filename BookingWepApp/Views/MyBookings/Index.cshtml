@@ -1,0 +1,29 @@
+﻿@using BookingWepApp.Models.Infrastructure
+@model IEnumerable<BookingWepApp.Models.Booking>
+@{
+    ViewData["Title"] = "My Bookings";
+}
+
+<h2>@ViewData["Title"]</h2>
+
+@if (Model != null && Model.Any())
+{
+    @foreach (var booking in Model)
+    {
+        <div class="card mt-2">
+            <div class="card-body">
+                <h5>Booking ID: @booking.Id</h5>
+                <p>Hotel: @(booking.Room?.Hotel?.Name ?? "Hotel data not available")</p>
+                <p>Room Type: @(booking.Room != null ? RoomTypeDecoder.GetRoomTypeName(booking.Room.RoomType) : "Room data not available")</p>
+                <p>Check-In: @booking.CheckIn.ToString("yyyy-MM-dd")</p>
+                <p>Check-Out: @booking.CheckOut.ToString("yyyy-MM-dd")</p>
+                <p>Amount: @(booking.Payment?.Amount ?? 0.00m) PLN</p>
+            </div>
+        </div>
+    }
+}
+else
+{
+    <p>No bookings found.</p>
+}
+

@@ -9,7 +9,8 @@ using Microsoft.AspNetCore.Hosting;
 
 namespace BookingWepApp.Controllers
 {
-    [Authorize(Roles = "Admin")]
+    //[Authorize(Roles = "Admin")]
+    [Authorize]
     public class AdminHotelsController : Controller
     {
         private readonly IMongoCollection<Hotel> _hotelsCollection;

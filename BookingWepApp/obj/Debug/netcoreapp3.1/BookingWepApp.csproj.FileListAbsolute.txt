@@ -592,7 +592,6 @@ C:\Users\Nick\Documents\NBD_Project\NBD_Project\BookingWepApp\bin\Debug\netcorea
 C:\Users\Nick\Documents\NBD_Project\NBD_Project\BookingWepApp\bin\Debug\netcoreapp3.1\refs\Microsoft.VisualBasic.Core.dll
 C:\Users\Nick\Documents\NBD_Project\NBD_Project\BookingWepApp\bin\Debug\netcoreapp3.1\refs\Microsoft.VisualBasic.dll
 C:\Users\Nick\Documents\NBD_Project\NBD_Project\BookingWepApp\bin\Debug\netcoreapp3.1\refs\Microsoft.Win32.Primitives.dll
-C:\Users\Nick\Documents\NBD_Project\NBD_Project\BookingWepApp\bin\Debug\netcoreapp3.1\refs\Microsoft.Win32.Registry.dll
 C:\Users\Nick\Documents\NBD_Project\NBD_Project\BookingWepApp\bin\Debug\netcoreapp3.1\refs\mscorlib.dll
 C:\Users\Nick\Documents\NBD_Project\NBD_Project\BookingWepApp\bin\Debug\netcoreapp3.1\refs\netstandard.dll
 C:\Users\Nick\Documents\NBD_Project\NBD_Project\BookingWepApp\bin\Debug\netcoreapp3.1\refs\System.AppContext.dll
@@ -683,7 +682,6 @@ C:\Users\Nick\Documents\NBD_Project\NBD_Project\BookingWepApp\bin\Debug\netcorea
 C:\Users\Nick\Documents\NBD_Project\NBD_Project\BookingWepApp\bin\Debug\netcoreapp3.1\refs\System.Resources.Reader.dll
 C:\Users\Nick\Documents\NBD_Project\NBD_Project\BookingWepApp\bin\Debug\netcoreapp3.1\refs\System.Resources.ResourceManager.dll
 C:\Users\Nick\Documents\NBD_Project\NBD_Project\BookingWepApp\bin\Debug\netcoreapp3.1\refs\System.Resources.Writer.dll
-C:\Users\Nick\Documents\NBD_Project\NBD_Project\BookingWepApp\bin\Debug\netcoreapp3.1\refs\System.Runtime.CompilerServices.Unsafe.dll
 C:\Users\Nick\Documents\NBD_Project\NBD_Project\BookingWepApp\bin\Debug\netcoreapp3.1\refs\System.Runtime.CompilerServices.VisualC.dll
 C:\Users\Nick\Documents\NBD_Project\NBD_Project\BookingWepApp\bin\Debug\netcoreapp3.1\refs\System.Runtime.dll
 C:\Users\Nick\Documents\NBD_Project\NBD_Project\BookingWepApp\bin\Debug\netcoreapp3.1\refs\System.Runtime.Extensions.dll
@@ -699,7 +697,6 @@ C:\Users\Nick\Documents\NBD_Project\NBD_Project\BookingWepApp\bin\Debug\netcorea
 C:\Users\Nick\Documents\NBD_Project\NBD_Project\BookingWepApp\bin\Debug\netcoreapp3.1\refs\System.Runtime.Serialization.Json.dll
 C:\Users\Nick\Documents\NBD_Project\NBD_Project\BookingWepApp\bin\Debug\netcoreapp3.1\refs\System.Runtime.Serialization.Primitives.dll
 C:\Users\Nick\Documents\NBD_Project\NBD_Project\BookingWepApp\bin\Debug\netcoreapp3.1\refs\System.Runtime.Serialization.Xml.dll
-C:\Users\Nick\Documents\NBD_Project\NBD_Project\BookingWepApp\bin\Debug\netcoreapp3.1\refs\System.Security.AccessControl.dll
 C:\Users\Nick\Documents\NBD_Project\NBD_Project\BookingWepApp\bin\Debug\netcoreapp3.1\refs\System.Security.Claims.dll
 C:\Users\Nick\Documents\NBD_Project\NBD_Project\BookingWepApp\bin\Debug\netcoreapp3.1\refs\System.Security.Cryptography.Algorithms.dll
 C:\Users\Nick\Documents\NBD_Project\NBD_Project\BookingWepApp\bin\Debug\netcoreapp3.1\refs\System.Security.Cryptography.Cng.dll
@@ -711,7 +708,6 @@ C:\Users\Nick\Documents\NBD_Project\NBD_Project\BookingWepApp\bin\Debug\netcorea
 C:\Users\Nick\Documents\NBD_Project\NBD_Project\BookingWepApp\bin\Debug\netcoreapp3.1\refs\System.Security.dll
 C:\Users\Nick\Documents\NBD_Project\NBD_Project\BookingWepApp\bin\Debug\netcoreapp3.1\refs\System.Security.Permissions.dll
 C:\Users\Nick\Documents\NBD_Project\NBD_Project\BookingWepApp\bin\Debug\netcoreapp3.1\refs\System.Security.Principal.dll
-C:\Users\Nick\Documents\NBD_Project\NBD_Project\BookingWepApp\bin\Debug\netcoreapp3.1\refs\System.Security.Principal.Windows.dll
 C:\Users\Nick\Documents\NBD_Project\NBD_Project\BookingWepApp\bin\Debug\netcoreapp3.1\refs\System.Security.SecureString.dll
 C:\Users\Nick\Documents\NBD_Project\NBD_Project\BookingWepApp\bin\Debug\netcoreapp3.1\refs\System.ServiceModel.Web.dll
 C:\Users\Nick\Documents\NBD_Project\NBD_Project\BookingWepApp\bin\Debug\netcoreapp3.1\refs\System.ServiceProcess.dll
@@ -951,3 +947,19 @@ C:\Users\Nick\Documents\NBD_Project\NBD_Project\BookingWepApp\obj\Debug\netcorea
 C:\Users\Nick\Documents\NBD_Project\NBD_Project\BookingWepApp\obj\Debug\netcoreapp3.1\BookingWepApp.dll
 C:\Users\Nick\Documents\NBD_Project\NBD_Project\BookingWepApp\obj\Debug\netcoreapp3.1\BookingWepApp.pdb
 C:\Users\Nick\Documents\NBD_Project\NBD_Project\BookingWepApp\obj\Debug\netcoreapp3.1\BookingWepApp.genruntimeconfig.cache
+C:\Users\Nick\Documents\NBD_Project\NBD_Project\BookingWepApp\bin\Debug\netcoreapp3.1\DnsClient.dll
+C:\Users\Nick\Documents\NBD_Project\NBD_Project\BookingWepApp\bin\Debug\netcoreapp3.1\Microsoft.Win32.Registry.dll
+C:\Users\Nick\Documents\NBD_Project\NBD_Project\BookingWepApp\bin\Debug\netcoreapp3.1\MongoDB.Bson.dll
+C:\Users\Nick\Documents\NBD_Project\NBD_Project\BookingWepApp\bin\Debug\netcoreapp3.1\MongoDB.Driver.dll
+C:\Users\Nick\Documents\NBD_Project\NBD_Project\BookingWepApp\bin\Debug\netcoreapp3.1\SharpCompress.dll
+C:\Users\Nick\Documents\NBD_Project\NBD_Project\BookingWepApp\bin\Debug\netcoreapp3.1\Snappier.dll
+C:\Users\Nick\Documents\NBD_Project\NBD_Project\BookingWepApp\bin\Debug\netcoreapp3.1\System.Runtime.CompilerServices.Unsafe.dll
+C:\Users\Nick\Documents\NBD_Project\NBD_Project\BookingWepApp\bin\Debug\netcoreapp3.1\System.Security.AccessControl.dll
+C:\Users\Nick\Documents\NBD_Project\NBD_Project\BookingWepApp\bin\Debug\netcoreapp3.1\System.Security.Principal.Windows.dll
+C:\Users\Nick\Documents\NBD_Project\NBD_Project\BookingWepApp\bin\Debug\netcoreapp3.1\ZstdSharp.dll
+C:\Users\Nick\Documents\NBD_Project\NBD_Project\BookingWepApp\bin\Debug\netcoreapp3.1\runtimes\win\lib\netstandard2.0\Microsoft.Win32.Registry.dll
+C:\Users\Nick\Documents\NBD_Project\NBD_Project\BookingWepApp\bin\Debug\netcoreapp3.1\runtimes\win\lib\netcoreapp2.0\System.Security.AccessControl.dll
+C:\Users\Nick\Documents\NBD_Project\NBD_Project\BookingWepApp\bin\Debug\netcoreapp3.1\runtimes\unix\lib\netcoreapp2.1\System.Security.Principal.Windows.dll
+C:\Users\Nick\Documents\NBD_Project\NBD_Project\BookingWepApp\bin\Debug\netcoreapp3.1\runtimes\win\lib\netcoreapp2.1\System.Security.Principal.Windows.dll
+C:\Users\Nick\Documents\NBD_Project\NBD_Project\BookingWepApp\obj\Debug\netcoreapp3.1\Razor\Views\MyBookings\Index.cshtml.g.cs
+C:\Users\Nick\Documents\NBD_Project\NBD_Project\BookingWepApp\obj\Debug\netcoreapp3.1\Razor\Areas\Identity\Pages\Account\Logout.cshtml.g.cs

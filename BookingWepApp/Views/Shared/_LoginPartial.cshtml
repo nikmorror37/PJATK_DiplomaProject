@@ -8,8 +8,16 @@
         <li class="nav-item">
             <a class="nav-link text-light" asp-area="Identity" asp-page="/Account/Manage/Index" title="Manage">Welcome, @User.Identity.Name!</a>
         </li>
+        @if (await UserManager.IsInRoleAsync(await UserManager.GetUserAsync(User), "Admin"))
+        {
+            <div class="admin-panel-container text-center">
+                <h3 class="admin-panel-title">Admin Panel</h3>
+                <a href="/AdminHotels/Index" class="btn btn-primary" style="margin-right: 10px;">Manage Hotels</a>
+                <a href="/AdminRooms/Index" class="btn btn-primary">Manage Rooms</a>
+            </div>
+        }
         <li class="nav-item">
-            <form class="form-inline" asp-area="Identity" asp-page="/Account/Logout" asp-route-returnUrl="@Url.Action("Index", "Home", new { area = "" })">
+            <form class="form-inline" method="post" asp-area="Identity" asp-page="/Account/Logout" asp-route-returnUrl="@Url.Action("Index", "Home", new { area = "" })">
                 <button type="submit" class="nav-link btn btn-link text-light">Exit</button>
             </form>
         </li>

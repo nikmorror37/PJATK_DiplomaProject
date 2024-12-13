@@ -1,5 +1,4 @@
 ﻿using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
@@ -12,24 +11,30 @@ namespace BookingWepApp
     {
         public static void Main(string[] args)
         {
+            // Build the host
             var host = CreateHostBuilder(args).Build();
+
+            // Create a scope for dependency injection
             using (var scope = host.Services.CreateScope())
             {
                 var services = scope.ServiceProvider;
                 try
                 {
-                    // Получаем MongoDbContext из контейнера DI
+                    // Get the MongoDbContext from the DI container
                     var mongoDbContext = services.GetRequiredService<MongoDbContext>();
 
-                    // Инициализируем тестовые данные
+                    // Seed initial data into MongoDB
                     mongoDbContext.SeedData();
                 }
                 catch (Exception ex)
                 {
+                    // Log any errors during MongoDB initialization
                     var logger = services.GetRequiredService<ILogger<Program>>();
-                    logger.LogError(ex, "Error with initialization MongoDB.");
+                    logger.LogError(ex, "An error occurred during MongoDB initialization.");
                 }
             }
+
+            // Run the host
             host.Run();
         }
 
@@ -37,7 +42,9 @@ namespace BookingWepApp
             Host.CreateDefaultBuilder(args)
                 .ConfigureWebHostDefaults(webBuilder =>
                 {
+                    // Specify the Startup class for configuration
                     webBuilder.UseStartup<Startup>();
                 });
     }
 }
+

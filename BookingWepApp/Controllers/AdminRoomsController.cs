@@ -8,7 +8,8 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 
 namespace BookingWepApp.Controllers
 {
-    [Authorize(Roles = "Admin")]
+    //[Authorize(Roles = "Admin")]
+    [Authorize]
     public class AdminRoomsController : Controller
     {
         private readonly IMongoCollection<Room> _roomsCollection;
@@ -21,18 +22,39 @@ namespace BookingWepApp.Controllers
             _hotelsCollection = database.GetCollection<Hotel>("Hotels");
         }
 
+        //public async Task<IActionResult> Index(string id)
+        //{
+        //    var roomsQuery = _roomsCollection.AsQueryable();
+
+        //    if (!string.IsNullOrEmpty(id))
+        //    {
+        //        roomsQuery = roomsQuery.Where(r => r.Id == id);
+        //    }
+
+        //    var rooms = await _roomsCollection.Find(_ => true).ToListAsync();
+        //    return View(rooms);
+        //}
+
         public async Task<IActionResult> Index(string id)
         {
-            var roomsQuery = _roomsCollection.AsQueryable();
+            // Получаем список всех комнат
+            var rooms = await _roomsCollection.Find(_ => true).ToListAsync();
 
-            if (!string.IsNullOrEmpty(id))
+            // Извлекаем уникальные HotelId из списка комнат
+            var hotelIds = rooms.Select(r => r.HotelId).Distinct().ToList();
+
+            // Получаем данные об отелях по HotelId
+            var hotels = await _hotelsCollection.Find(h => hotelIds.Contains(h.Id)).ToListAsync();
+
+            // Связываем комнаты с отелями
+            foreach (var room in rooms)
             {
-                roomsQuery = roomsQuery.Where(r => r.Id == id);
+                room.Hotel = hotels.FirstOrDefault(h => h.Id == room.HotelId);
             }
 
-            var rooms = await _roomsCollection.Find(_ => true).ToListAsync();
             return View(rooms);
         }
+
 
         public async Task<IActionResult> Create()
         {

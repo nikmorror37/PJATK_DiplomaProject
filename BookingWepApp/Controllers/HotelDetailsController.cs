@@ -9,6 +9,7 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.Extensions.Configuration;
 
 namespace BookingWepApp.Controllers
 {
@@ -20,12 +21,17 @@ namespace BookingWepApp.Controllers
         private readonly IMongoCollection<Booking> _bookingsCollection;
         private readonly UserManager<ApplicationUser> _userManager;
 
-        public HotelDetailsController(IMongoClient mongoClient, UserManager<ApplicationUser> userManager)
+        public HotelDetailsController(IMongoClient mongoClient, IConfiguration configuration, UserManager<ApplicationUser> userManager)
         {
-            var database = mongoClient.GetDatabase("BookingDb");
+            // Retrieve the database name from the configuration
+            var databaseName = configuration.GetSection("MongoDbSettings:DatabaseName").Value;
+            var database = mongoClient.GetDatabase(databaseName);
+
+            // Initialize collections
             _hotelsCollection = database.GetCollection<Hotel>("Hotels");
             _roomsCollection = database.GetCollection<Room>("Rooms");
             _bookingsCollection = database.GetCollection<Booking>("Bookings");
+
             _userManager = userManager;
         }
 
@@ -53,27 +59,37 @@ namespace BookingWepApp.Controllers
 
         public async Task<IActionResult> BookRoom(RoomType roomType, string id)
         {
-            CurrentUser = await _userManager.GetUserAsync(User);
-            if (CurrentUser != null)
+            try
             {
-                ViewBag.User = CurrentUser;
-            }
+                // Fetch current user
+                CurrentUser = await _userManager.GetUserAsync(User);
+                if (CurrentUser == null)
+                {
+                    return Unauthorized("User not logged in.");
+                }
 
-            var availableRoomToBeBooked = await _roomsCollection.Find(r => r.HotelId == id && r.RoomType == roomType).FirstOrDefaultAsync();
+                // Find an available room
+                var availableRoomToBeBooked = await _roomsCollection.Find(r => r.HotelId == id && r.RoomType == roomType).FirstOrDefaultAsync();
+                if (availableRoomToBeBooked == null)
+                {
+                    return NotFound("No available room found for the selected hotel and room type.");
+                }
 
-            if (availableRoomToBeBooked != null)
-            {
+                // Save booking data in session
                 HttpContext.Session.SetString("roomId", availableRoomToBeBooked.Id);
                 HttpContext.Session.SetString("CheckInDate", HotelDetailsData.CheckInDate.ToString("yyyy-MM-dd"));
                 HttpContext.Session.SetString("CheckOutDate", HotelDetailsData.CheckOutDate.ToString("yyyy-MM-dd"));
 
                 return RedirectToAction("Checkout", "Checkout");
             }
-            else
+            catch (Exception ex)
             {
-                return NotFound();
+                Console.WriteLine(ex.Message); // Log errors
+                return BadRequest("An error occurred while booking the room.");
             }
         }
+
+
 
         private List<DateTime> GetStayingDaysRangeList()
         {
@@ -106,6 +122,12 @@ namespace BookingWepApp.Controllers
             // Fetch all rooms for the hotel
             var allRooms = await _roomsCollection.Find(r => r.HotelId == hotelId).ToListAsync();
 
+            if (allRooms.Count == 0)
+            {
+                ViewBag.Error = "No rooms available in this hotel.";
+                return View("HotelPage", HotelDetailsData.CurrentHotel);
+            }
+
             // Get the IDs of all rooms in this hotel
             var roomIds = allRooms.Select(r => r.Id).ToList();
 
@@ -115,6 +137,11 @@ namespace BookingWepApp.Controllers
                 b.CheckIn < checkOutDate &&   // Booking starts before the check-out date
                 b.CheckOut > checkInDate      // Booking ends after the check-in date
             ).ToListAsync();
+
+            if (bookedRooms.Count == 0)
+            {
+                ViewBag.Error = "All rooms are available.";
+            }
 
             // Group rooms by RoomType and calculate availability
             var roomItems = allRooms
@@ -139,16 +166,14 @@ namespace BookingWepApp.Controllers
             HotelDetailsData.CheckInDate = checkInDate;
             HotelDetailsData.CheckOutDate = checkOutDate;
 
-            // Return the updated view
             return View("HotelPage", HotelDetailsData.CurrentHotel);
         }
 
-    }
-
-    public class RoomItem
-    {
-        public RoomType RoomType { get; set; }
-        public int AvailableRooms { get; set; }
-        public int TotalRooms { get; set; }
+        public class RoomItem
+        {
+            public RoomType RoomType { get; set; }
+            public int AvailableRooms { get; set; }
+            public int TotalRooms { get; set; }
+        }
     }
 }
