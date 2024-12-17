@@ -19,7 +19,7 @@
             <label class="currentCurrency">PLN</label><br />
             <input type="hidden" asp-for="@Model.Amount" class="totalPriceHidden" val="" style="width:100px" />
             <br />
-            <h6 class="card-text font-weight-bold">Выберите способ оплаты:</h6>
+            <h6 class="card-text font-weight-bold">Select the payment method:</h6>
             <div>
                 @foreach (var item in Enum.GetValues(typeof(CardType)))
                 {
@@ -67,7 +67,7 @@
                 </select>
                 <span asp-validation-for="@Model.ExpirationDate" class="text-danger"></span><br />
 
-                <h6 class="card-text font-weight-bold text-primary">CVV-код:</h6>
+                <h6 class="card-text font-weight-bold text-primary">CVV:</h6>
                 <input class="form-control col-3 payment-input" asp-for="@Model.CVV" />
                 <span asp-validation-for="@Model.CVV" class="text-danger"></span><br />
 

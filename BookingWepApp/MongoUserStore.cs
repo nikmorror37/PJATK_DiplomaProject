@@ -45,11 +45,6 @@ namespace BookingWepApp
             return await _usersCollection.Find(u => u.Id == userId).FirstOrDefaultAsync(cancellationToken);
         }
 
-        //public async Task<ApplicationUser> FindByNameAsync(string normalizedUserName, CancellationToken cancellationToken)
-        //{
-        //    cancellationToken.ThrowIfCancellationRequested();
-        //    return await _usersCollection.Find(u => u.NormalizedUserName == normalizedUserName).FirstOrDefaultAsync(cancellationToken);
-        //}
         public async Task<ApplicationUser> FindByNameAsync(string normalizedUserName, CancellationToken cancellationToken)
         {
             cancellationToken.ThrowIfCancellationRequested();

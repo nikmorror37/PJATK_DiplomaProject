@@ -22,19 +22,6 @@ namespace BookingWepApp.Controllers
             _hotelsCollection = database.GetCollection<Hotel>("Hotels");
         }
 
-        //public async Task<IActionResult> Index(string id)
-        //{
-        //    var roomsQuery = _roomsCollection.AsQueryable();
-
-        //    if (!string.IsNullOrEmpty(id))
-        //    {
-        //        roomsQuery = roomsQuery.Where(r => r.Id == id);
-        //    }
-
-        //    var rooms = await _roomsCollection.Find(_ => true).ToListAsync();
-        //    return View(rooms);
-        //}
-
         public async Task<IActionResult> Index(string id)
         {
             // Получаем список всех комнат

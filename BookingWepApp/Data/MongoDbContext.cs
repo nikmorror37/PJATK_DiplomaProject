@@ -13,9 +13,6 @@ namespace BookingWepApp.Data
 
         public MongoDbContext(IConfiguration configuration)
         {
-            //var connectionString = configuration.GetSection("MongoDbSettings:ConnectionString").Value;
-            //var databaseName = configuration.GetSection("MongoDbSettings:DatabaseName").Value;
-
             // Retrieve connection string and database name from configuration
             var connectionString = configuration.GetValue<string>("MongoDbSettings:ConnectionString");
             var databaseName = configuration.GetValue<string>("MongoDbSettings:DatabaseName");
@@ -57,7 +54,7 @@ namespace BookingWepApp.Data
                 // Проверяем, если коллекция Hotels пуста
                 if (Hotels.EstimatedDocumentCount() == 0)
                 {
-                    // Добавляем тестовые отели
+                    // Add test hotels
                     var hotels = new List<Hotel>
                     {
                         new Hotel
@@ -71,7 +68,7 @@ namespace BookingWepApp.Data
                             Description = "Hotel Ritz is located in Paris, 500 meters from the Opera Garnier. It offers several bars and restaurants, a garden and a business center.",
                             Stars = 5,
                             DistanceFromCenter = 8.3,
-                            ImageUrl = "~/pictures/hotels/hotel1.jpg"
+                            ImageUrl = "~/pictures/hotels/hotelRitzParis.jpg"
                         },
                         new Hotel
                         {
@@ -84,7 +81,7 @@ namespace BookingWepApp.Data
                             Description = "The luxurious Corinthia Hotel is located in one of London's most prestigious neighborhoods, steps from Trafalgar Square and Whitehall.",
                             Stars = 5,
                             DistanceFromCenter = 1.6,
-                            ImageUrl = "~/pictures/hotels/hotel2.jpg"
+                            ImageUrl = "~/pictures/hotels/hotel_corinthia.jpg"
                         },
                         new Hotel
                         {
@@ -97,13 +94,27 @@ namespace BookingWepApp.Data
                             Description = "Experience the essence of Amsterdam at the Leonardo Hotel Amsterdam City Center.",
                             Stars = 4,
                             DistanceFromCenter = 1.6,
-                            ImageUrl = "~/pictures/hotels/hotel3.jpg"
-                        }
+                            ImageUrl = "~/pictures/hotels/hotel_leonardo.jpg"
+                        },
+                        new Hotel
+                        {
+                            Name = "Bristol Hotel Warsaw",
+                            Website = "https://www.hotelbristolwarsaw.pl/",
+                            Address = "Krakowskie Przedmiescie 42/44",
+                            ZipCode = "00-325",
+                            City = "Warsaw",
+                            Country = "Poland",
+                            Description = "A historic five-star luxury hotel built in the Neo-Renaissance style and opened in 1901 in Warsaw, Poland. It is located in the city centre next to the Presidential Palace.",
+                            Stars = 5,
+                            DistanceFromCenter = 0.5,
+                            ImageUrl = "~/pictures/hotels/hotel_bristol.jpg"
+                        },
+
                     };
 
                     Hotels.InsertMany(hotels);
 
-                    // Добавляем тестовые комнаты
+                    // Add test rooms
                     var random = new Random();
                     var roomDescriptionArray = new[]
                     {

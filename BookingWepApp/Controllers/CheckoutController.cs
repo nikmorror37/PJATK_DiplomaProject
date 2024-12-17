@@ -32,36 +32,6 @@ namespace BookingWepApp.Controllers
             _userManager = userManager;
         }
 
-        //public async Task<IActionResult> Checkout()
-        //{
-        //    var claimsIdentity = (ClaimsIdentity)User.Identity;
-        //    var identityClaim = claimsIdentity.FindFirst(ClaimTypes.NameIdentifier);
-
-        //    var booking = new Booking
-        //    {
-        //        RoomId = HttpContext.Session.GetString("roomId"),
-        //        CheckIn = Convert.ToDateTime(HttpContext.Session.GetString("CheckInDate")),
-        //        CheckOut = Convert.ToDateTime(HttpContext.Session.GetString("CheckOutDate")),
-        //        Status = Status.Pending,
-        //        UserId = identityClaim.Value
-        //    };
-
-        //    await _bookingsCollection.InsertOneAsync(booking);
-
-        //    var room = await _roomsCollection.Find(r => r.Id == booking.RoomId).FirstOrDefaultAsync();
-        //    var roomPrice = room.RoomPrice;
-        //    var numberOfNights = (booking.CheckOut - booking.CheckIn).TotalDays;
-        //    var totalPrice = decimal.Round(roomPrice * (decimal)numberOfNights, 2);
-
-        //    ViewBag.RoomPrice = roomPrice;
-        //    ViewBag.NumberOfNights = numberOfNights;
-        //    ViewBag.TotalPrice = totalPrice;
-
-        //    HttpContext.Session.SetString("bookingId", booking.Id);
-
-        //    return View();
-        //}
-
         public async Task<IActionResult> Checkout()
         {
             try

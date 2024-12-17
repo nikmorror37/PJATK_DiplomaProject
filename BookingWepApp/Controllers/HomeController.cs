@@ -52,28 +52,6 @@ namespace BookingWepApp.Controllers
             return View();
         }
 
-
-        //[HttpGet]
-        //public async Task<IActionResult> AssignAdminRole()
-        //{
-        //	var userManager = HttpContext.RequestServices.GetRequiredService<UserManager<ApplicationUser>>();
-        //	var admin = await userManager.FindByNameAsync("admin");
-        //	if (admin != null)
-        //	{
-        //		var result = await userManager.AddToRoleAsync(admin, "Admin");
-        //		if (result.Succeeded)
-        //		{
-        //			return Content("Role Admin successfully assigned to user admin.");
-        //		}
-        //		else
-        //		{
-        //			return Content("Failed to assign role: " + string.Join(", ", result.Errors.Select(e => e.Description)));
-        //		}
-        //	}
-        //	return Content("Admin user not found.");
-        //}
-
-
         // httpPost помечает метод, который предназначен для передачи данных
         [HttpPost]
         // Фильтр ValidateAntiForgeryToken предназначен для противодействия подделке межсайтовых запросов

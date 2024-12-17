@@ -166,9 +166,7 @@ namespace BookingWepApp
 
                 var createAdminResult = await userManager.CreateAsync(newAdmin, adminPassword);
                 if (createAdminResult.Succeeded)
-                {
-                    // await userManager.AddToRoleAsync(newAdmin, "Admin");
-                    
+                {   
                     await userManager.AddToRoleAsync(newAdmin, "Admin");
 
                     // Explicitly add role claims

@@ -2,6 +2,14 @@
     white-space: normal;
     text-align: center;
     word-break: break-all;
+    font-size: 2rem;
+    font-weight: bold; 
+    color: #ffffff; 
+    text-decoration: none;
+}
+
+a.navbar-brand:hover {
+    color: #b0bec5;
 }
 
 a {
@@ -74,4 +82,8 @@ body {
     margin-bottom: 10px; /* Расстояние между заголовком и кнопками */
     font-size: 1.5rem; /* Увеличение размера шрифта заголовка */
     font-weight: bold; /* Полужирный текст */
+}
+
+.navbar-text-large {
+    font-size: 1.25rem; /* Увеличение размера шрифта */
 }
