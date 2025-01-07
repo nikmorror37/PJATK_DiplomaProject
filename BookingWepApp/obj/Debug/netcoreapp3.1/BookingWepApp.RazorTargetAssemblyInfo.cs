@@ -17,7 +17,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyProductAttribute("BookingWepApp")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+9f9b42a7db6759f630e2d4f5712e689051337131")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+8c2d1055233a2dcbff5828b0b6a4b320f5b0e880")]
 [assembly: System.Reflection.AssemblyTitleAttribute("BookingWepApp.Views")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
 
