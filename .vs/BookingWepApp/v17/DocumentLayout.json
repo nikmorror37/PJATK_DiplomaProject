@@ -3,20 +3,104 @@
   "WorkspaceRootPath": "C:\\Users\\Nick\\Documents\\NBD_Project\\NBD_Project\\",
   "Documents": [
     {
+      "AbsoluteMoniker": "D:0:0:{75558B3F-7D54-4FCC-8C87-4F87FCEC1256}|BookingWepApp\\BookingWepApp.csproj|c:\\users\\nick\\documents\\nbd_project\\nbd_project\\bookingwepapp\\data\\mongodbcontext.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{75558B3F-7D54-4FCC-8C87-4F87FCEC1256}|BookingWepApp\\BookingWepApp.csproj|solutionrelative:bookingwepapp\\data\\mongodbcontext.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{75558B3F-7D54-4FCC-8C87-4F87FCEC1256}|BookingWepApp\\BookingWepApp.csproj|c:\\users\\nick\\documents\\nbd_project\\nbd_project\\bookingwepapp\\views\\_viewstart.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{75558B3F-7D54-4FCC-8C87-4F87FCEC1256}|BookingWepApp\\BookingWepApp.csproj|solutionrelative:bookingwepapp\\views\\_viewstart.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{75558B3F-7D54-4FCC-8C87-4F87FCEC1256}|BookingWepApp\\BookingWepApp.csproj|c:\\users\\nick\\documents\\nbd_project\\nbd_project\\bookingwepapp\\views\\_viewimports.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{75558B3F-7D54-4FCC-8C87-4F87FCEC1256}|BookingWepApp\\BookingWepApp.csproj|solutionrelative:bookingwepapp\\views\\_viewimports.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{75558B3F-7D54-4FCC-8C87-4F87FCEC1256}|BookingWepApp\\BookingWepApp.csproj|c:\\users\\nick\\documents\\nbd_project\\nbd_project\\bookingwepapp\\views\\shared\\error.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{75558B3F-7D54-4FCC-8C87-4F87FCEC1256}|BookingWepApp\\BookingWepApp.csproj|solutionrelative:bookingwepapp\\views\\shared\\error.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{75558B3F-7D54-4FCC-8C87-4F87FCEC1256}|BookingWepApp\\BookingWepApp.csproj|c:\\users\\nick\\documents\\nbd_project\\nbd_project\\bookingwepapp\\views\\shared\\_validationscriptspartial.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{75558B3F-7D54-4FCC-8C87-4F87FCEC1256}|BookingWepApp\\BookingWepApp.csproj|solutionrelative:bookingwepapp\\views\\shared\\_validationscriptspartial.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{75558B3F-7D54-4FCC-8C87-4F87FCEC1256}|BookingWepApp\\BookingWepApp.csproj|c:\\users\\nick\\documents\\nbd_project\\nbd_project\\bookingwepapp\\views\\shared\\_searchpartial.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{75558B3F-7D54-4FCC-8C87-4F87FCEC1256}|BookingWepApp\\BookingWepApp.csproj|solutionrelative:bookingwepapp\\views\\shared\\_searchpartial.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{75558B3F-7D54-4FCC-8C87-4F87FCEC1256}|BookingWepApp\\BookingWepApp.csproj|c:\\users\\nick\\documents\\nbd_project\\nbd_project\\bookingwepapp\\views\\shared\\_loginpartial.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{75558B3F-7D54-4FCC-8C87-4F87FCEC1256}|BookingWepApp\\BookingWepApp.csproj|solutionrelative:bookingwepapp\\views\\shared\\_loginpartial.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{75558B3F-7D54-4FCC-8C87-4F87FCEC1256}|BookingWepApp\\BookingWepApp.csproj|c:\\users\\nick\\documents\\nbd_project\\nbd_project\\bookingwepapp\\views\\shared\\_layout.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{75558B3F-7D54-4FCC-8C87-4F87FCEC1256}|BookingWepApp\\BookingWepApp.csproj|solutionrelative:bookingwepapp\\views\\shared\\_layout.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{75558B3F-7D54-4FCC-8C87-4F87FCEC1256}|BookingWepApp\\BookingWepApp.csproj|c:\\users\\nick\\documents\\nbd_project\\nbd_project\\bookingwepapp\\areas\\identity\\pages\\error.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{75558B3F-7D54-4FCC-8C87-4F87FCEC1256}|BookingWepApp\\BookingWepApp.csproj|solutionrelative:bookingwepapp\\areas\\identity\\pages\\error.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{75558B3F-7D54-4FCC-8C87-4F87FCEC1256}|BookingWepApp\\BookingWepApp.csproj|c:\\users\\nick\\documents\\nbd_project\\nbd_project\\bookingwepapp\\areas\\identity\\pages\\_viewstart.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{75558B3F-7D54-4FCC-8C87-4F87FCEC1256}|BookingWepApp\\BookingWepApp.csproj|solutionrelative:bookingwepapp\\areas\\identity\\pages\\_viewstart.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{75558B3F-7D54-4FCC-8C87-4F87FCEC1256}|BookingWepApp\\BookingWepApp.csproj|c:\\users\\nick\\documents\\nbd_project\\nbd_project\\bookingwepapp\\areas\\identity\\pages\\_viewimports.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{75558B3F-7D54-4FCC-8C87-4F87FCEC1256}|BookingWepApp\\BookingWepApp.csproj|solutionrelative:bookingwepapp\\areas\\identity\\pages\\_viewimports.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{75558B3F-7D54-4FCC-8C87-4F87FCEC1256}|BookingWepApp\\BookingWepApp.csproj|c:\\users\\nick\\documents\\nbd_project\\nbd_project\\bookingwepapp\\areas\\identity\\pages\\_validationscriptspartial.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{75558B3F-7D54-4FCC-8C87-4F87FCEC1256}|BookingWepApp\\BookingWepApp.csproj|solutionrelative:bookingwepapp\\areas\\identity\\pages\\_validationscriptspartial.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{75558B3F-7D54-4FCC-8C87-4F87FCEC1256}|BookingWepApp\\BookingWepApp.csproj|c:\\users\\nick\\documents\\nbd_project\\nbd_project\\bookingwepapp\\areas\\identity\\pages\\account\\login.cshtml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{75558B3F-7D54-4FCC-8C87-4F87FCEC1256}|BookingWepApp\\BookingWepApp.csproj|solutionrelative:bookingwepapp\\areas\\identity\\pages\\account\\login.cshtml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{75558B3F-7D54-4FCC-8C87-4F87FCEC1256}|BookingWepApp\\BookingWepApp.csproj|c:\\users\\nick\\documents\\nbd_project\\nbd_project\\bookingwepapp\\areas\\identity\\pages\\account\\login.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{75558B3F-7D54-4FCC-8C87-4F87FCEC1256}|BookingWepApp\\BookingWepApp.csproj|solutionrelative:bookingwepapp\\areas\\identity\\pages\\account\\login.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{75558B3F-7D54-4FCC-8C87-4F87FCEC1256}|BookingWepApp\\BookingWepApp.csproj|c:\\users\\nick\\documents\\nbd_project\\nbd_project\\bookingwepapp\\areas\\identity\\pages\\account\\_viewimports.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{75558B3F-7D54-4FCC-8C87-4F87FCEC1256}|BookingWepApp\\BookingWepApp.csproj|solutionrelative:bookingwepapp\\areas\\identity\\pages\\account\\_viewimports.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{75558B3F-7D54-4FCC-8C87-4F87FCEC1256}|BookingWepApp\\BookingWepApp.csproj|c:\\users\\nick\\documents\\nbd_project\\nbd_project\\bookingwepapp\\areas\\identity\\pages\\account\\_statusmessage.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{75558B3F-7D54-4FCC-8C87-4F87FCEC1256}|BookingWepApp\\BookingWepApp.csproj|solutionrelative:bookingwepapp\\areas\\identity\\pages\\account\\_statusmessage.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{75558B3F-7D54-4FCC-8C87-4F87FCEC1256}|BookingWepApp\\BookingWepApp.csproj|c:\\users\\nick\\documents\\nbd_project\\nbd_project\\bookingwepapp\\areas\\identity\\pages\\account\\manage\\managenavpages.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{75558B3F-7D54-4FCC-8C87-4F87FCEC1256}|BookingWepApp\\BookingWepApp.csproj|solutionrelative:bookingwepapp\\areas\\identity\\pages\\account\\manage\\managenavpages.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{75558B3F-7D54-4FCC-8C87-4F87FCEC1256}|BookingWepApp\\BookingWepApp.csproj|c:\\users\\nick\\documents\\nbd_project\\nbd_project\\bookingwepapp\\areas\\identity\\pages\\account\\manage\\index.cshtml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{75558B3F-7D54-4FCC-8C87-4F87FCEC1256}|BookingWepApp\\BookingWepApp.csproj|solutionrelative:bookingwepapp\\areas\\identity\\pages\\account\\manage\\index.cshtml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{75558B3F-7D54-4FCC-8C87-4F87FCEC1256}|BookingWepApp\\BookingWepApp.csproj|c:\\users\\nick\\documents\\nbd_project\\nbd_project\\bookingwepapp\\areas\\identity\\pages\\account\\manage\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{75558B3F-7D54-4FCC-8C87-4F87FCEC1256}|BookingWepApp\\BookingWepApp.csproj|solutionrelative:bookingwepapp\\areas\\identity\\pages\\account\\manage\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{75558B3F-7D54-4FCC-8C87-4F87FCEC1256}|BookingWepApp\\BookingWepApp.csproj|c:\\users\\nick\\documents\\nbd_project\\nbd_project\\bookingwepapp\\areas\\identity\\pages\\account\\manage\\_viewimports.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{75558B3F-7D54-4FCC-8C87-4F87FCEC1256}|BookingWepApp\\BookingWepApp.csproj|solutionrelative:bookingwepapp\\areas\\identity\\pages\\account\\manage\\_viewimports.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{75558B3F-7D54-4FCC-8C87-4F87FCEC1256}|BookingWepApp\\BookingWepApp.csproj|c:\\users\\nick\\documents\\nbd_project\\nbd_project\\bookingwepapp\\areas\\identity\\pages\\account\\manage\\_statusmessage.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{75558B3F-7D54-4FCC-8C87-4F87FCEC1256}|BookingWepApp\\BookingWepApp.csproj|solutionrelative:bookingwepapp\\areas\\identity\\pages\\account\\manage\\_statusmessage.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{75558B3F-7D54-4FCC-8C87-4F87FCEC1256}|BookingWepApp\\BookingWepApp.csproj|c:\\users\\nick\\documents\\nbd_project\\nbd_project\\bookingwepapp\\areas\\identity\\pages\\account\\manage\\_managenav.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{75558B3F-7D54-4FCC-8C87-4F87FCEC1256}|BookingWepApp\\BookingWepApp.csproj|solutionrelative:bookingwepapp\\areas\\identity\\pages\\account\\manage\\_managenav.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{75558B3F-7D54-4FCC-8C87-4F87FCEC1256}|BookingWepApp\\BookingWepApp.csproj|c:\\users\\nick\\documents\\nbd_project\\nbd_project\\bookingwepapp\\areas\\identity\\pages\\account\\manage\\_layout.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{75558B3F-7D54-4FCC-8C87-4F87FCEC1256}|BookingWepApp\\BookingWepApp.csproj|solutionrelative:bookingwepapp\\areas\\identity\\pages\\account\\manage\\_layout.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
       "AbsoluteMoniker": "D:0:0:{75558B3F-7D54-4FCC-8C87-4F87FCEC1256}|BookingWepApp\\BookingWepApp.csproj|c:\\users\\nick\\documents\\nbd_project\\nbd_project\\bookingwepapp\\appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}",
       "RelativeMoniker": "D:0:0:{75558B3F-7D54-4FCC-8C87-4F87FCEC1256}|BookingWepApp\\BookingWepApp.csproj|solutionrelative:bookingwepapp\\appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{75558B3F-7D54-4FCC-8C87-4F87FCEC1256}|BookingWepApp\\BookingWepApp.csproj|c:\\users\\nick\\documents\\nbd_project\\nbd_project\\bookingwepapp\\appsettings.development.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}",
       "RelativeMoniker": "D:0:0:{75558B3F-7D54-4FCC-8C87-4F87FCEC1256}|BookingWepApp\\BookingWepApp.csproj|solutionrelative:bookingwepapp\\appsettings.development.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{75558B3F-7D54-4FCC-8C87-4F87FCEC1256}|BookingWepApp\\BookingWepApp.csproj|c:\\users\\nick\\documents\\nbd_project\\nbd_project\\bookingwepapp\\data\\mongodbcontext.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{75558B3F-7D54-4FCC-8C87-4F87FCEC1256}|BookingWepApp\\BookingWepApp.csproj|solutionrelative:bookingwepapp\\data\\mongodbcontext.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{75558B3F-7D54-4FCC-8C87-4F87FCEC1256}|BookingWepApp\\BookingWepApp.csproj|c:\\users\\nick\\documents\\nbd_project\\nbd_project\\bookingwepapp\\views\\shared\\_layout.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
-      "RelativeMoniker": "D:0:0:{75558B3F-7D54-4FCC-8C87-4F87FCEC1256}|BookingWepApp\\BookingWepApp.csproj|solutionrelative:bookingwepapp\\views\\shared\\_layout.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{75558B3F-7D54-4FCC-8C87-4F87FCEC1256}|BookingWepApp\\BookingWepApp.csproj|c:\\users\\nick\\documents\\nbd_project\\nbd_project\\bookingwepapp\\models\\room.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
@@ -42,7 +126,7 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 13,
+          "SelectedChildIndex": 17,
           "Children": [
             {
               "$type": "Bookmark",
@@ -98,7 +182,306 @@
             },
             {
               "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "_ViewStart.cshtml",
+              "DocumentMoniker": "C:\\Users\\Nick\\Documents\\NBD_Project\\NBD_Project\\BookingWepApp\\Views\\_ViewStart.cshtml",
+              "RelativeDocumentMoniker": "BookingWepApp\\Views\\_ViewStart.cshtml",
+              "ToolTip": "C:\\Users\\Nick\\Documents\\NBD_Project\\NBD_Project\\BookingWepApp\\Views\\_ViewStart.cshtml",
+              "RelativeToolTip": "BookingWepApp\\Views\\_ViewStart.cshtml",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-01-20T11:39:00.881Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "Error.cshtml",
+              "DocumentMoniker": "C:\\Users\\Nick\\Documents\\NBD_Project\\NBD_Project\\BookingWepApp\\Views\\Shared\\Error.cshtml",
+              "RelativeDocumentMoniker": "BookingWepApp\\Views\\Shared\\Error.cshtml",
+              "ToolTip": "C:\\Users\\Nick\\Documents\\NBD_Project\\NBD_Project\\BookingWepApp\\Views\\Shared\\Error.cshtml",
+              "RelativeToolTip": "BookingWepApp\\Views\\Shared\\Error.cshtml",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-01-20T11:38:55.366Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "_ValidationScriptsPartial.cshtml",
+              "DocumentMoniker": "C:\\Users\\Nick\\Documents\\NBD_Project\\NBD_Project\\BookingWepApp\\Views\\Shared\\_ValidationScriptsPartial.cshtml",
+              "RelativeDocumentMoniker": "BookingWepApp\\Views\\Shared\\_ValidationScriptsPartial.cshtml",
+              "ToolTip": "C:\\Users\\Nick\\Documents\\NBD_Project\\NBD_Project\\BookingWepApp\\Views\\Shared\\_ValidationScriptsPartial.cshtml",
+              "RelativeToolTip": "BookingWepApp\\Views\\Shared\\_ValidationScriptsPartial.cshtml",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-01-20T11:38:53.786Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 5,
+              "Title": "_SearchPartial.cshtml",
+              "DocumentMoniker": "C:\\Users\\Nick\\Documents\\NBD_Project\\NBD_Project\\BookingWepApp\\Views\\Shared\\_SearchPartial.cshtml",
+              "RelativeDocumentMoniker": "BookingWepApp\\Views\\Shared\\_SearchPartial.cshtml",
+              "ToolTip": "C:\\Users\\Nick\\Documents\\NBD_Project\\NBD_Project\\BookingWepApp\\Views\\Shared\\_SearchPartial.cshtml",
+              "RelativeToolTip": "BookingWepApp\\Views\\Shared\\_SearchPartial.cshtml",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-01-20T11:38:51.297Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
               "DocumentIndex": 0,
+              "Title": "MongoDbContext.cs",
+              "DocumentMoniker": "C:\\Users\\Nick\\Documents\\NBD_Project\\NBD_Project\\BookingWepApp\\Data\\MongoDbContext.cs",
+              "RelativeDocumentMoniker": "BookingWepApp\\Data\\MongoDbContext.cs",
+              "ToolTip": "C:\\Users\\Nick\\Documents\\NBD_Project\\NBD_Project\\BookingWepApp\\Data\\MongoDbContext.cs",
+              "RelativeToolTip": "BookingWepApp\\Data\\MongoDbContext.cs",
+              "ViewState": "AQIAACcAAAAAAAAAAAA7wC8AAAAMAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-12-18T10:09:46.65Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "_ViewImports.cshtml",
+              "DocumentMoniker": "C:\\Users\\Nick\\Documents\\NBD_Project\\NBD_Project\\BookingWepApp\\Views\\_ViewImports.cshtml",
+              "RelativeDocumentMoniker": "BookingWepApp\\Views\\_ViewImports.cshtml",
+              "ToolTip": "C:\\Users\\Nick\\Documents\\NBD_Project\\NBD_Project\\BookingWepApp\\Views\\_ViewImports.cshtml",
+              "RelativeToolTip": "BookingWepApp\\Views\\_ViewImports.cshtml",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-01-20T11:38:58.17Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 6,
+              "Title": "_LoginPartial.cshtml",
+              "DocumentMoniker": "C:\\Users\\Nick\\Documents\\NBD_Project\\NBD_Project\\BookingWepApp\\Views\\Shared\\_LoginPartial.cshtml",
+              "RelativeDocumentMoniker": "BookingWepApp\\Views\\Shared\\_LoginPartial.cshtml",
+              "ToolTip": "C:\\Users\\Nick\\Documents\\NBD_Project\\NBD_Project\\BookingWepApp\\Views\\Shared\\_LoginPartial.cshtml",
+              "RelativeToolTip": "BookingWepApp\\Views\\Shared\\_LoginPartial.cshtml",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-01-20T11:38:46.241Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 8,
+              "Title": "Error.cshtml",
+              "DocumentMoniker": "C:\\Users\\Nick\\Documents\\NBD_Project\\NBD_Project\\BookingWepApp\\Areas\\Identity\\Pages\\Error.cshtml",
+              "RelativeDocumentMoniker": "BookingWepApp\\Areas\\Identity\\Pages\\Error.cshtml",
+              "ToolTip": "C:\\Users\\Nick\\Documents\\NBD_Project\\NBD_Project\\BookingWepApp\\Areas\\Identity\\Pages\\Error.cshtml",
+              "RelativeToolTip": "BookingWepApp\\Areas\\Identity\\Pages\\Error.cshtml",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-01-20T11:38:04.791Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 9,
+              "Title": "_ViewStart.cshtml",
+              "DocumentMoniker": "C:\\Users\\Nick\\Documents\\NBD_Project\\NBD_Project\\BookingWepApp\\Areas\\Identity\\Pages\\_ViewStart.cshtml",
+              "RelativeDocumentMoniker": "BookingWepApp\\Areas\\Identity\\Pages\\_ViewStart.cshtml",
+              "ToolTip": "C:\\Users\\Nick\\Documents\\NBD_Project\\NBD_Project\\BookingWepApp\\Areas\\Identity\\Pages\\_ViewStart.cshtml",
+              "RelativeToolTip": "BookingWepApp\\Areas\\Identity\\Pages\\_ViewStart.cshtml",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-01-20T11:38:03.381Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 10,
+              "Title": "_ViewImports.cshtml",
+              "DocumentMoniker": "C:\\Users\\Nick\\Documents\\NBD_Project\\NBD_Project\\BookingWepApp\\Areas\\Identity\\Pages\\_ViewImports.cshtml",
+              "RelativeDocumentMoniker": "BookingWepApp\\Areas\\Identity\\Pages\\_ViewImports.cshtml",
+              "ToolTip": "C:\\Users\\Nick\\Documents\\NBD_Project\\NBD_Project\\BookingWepApp\\Areas\\Identity\\Pages\\_ViewImports.cshtml",
+              "RelativeToolTip": "BookingWepApp\\Areas\\Identity\\Pages\\_ViewImports.cshtml",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-01-20T11:38:01.845Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 11,
+              "Title": "_ValidationScriptsPartial.cshtml",
+              "DocumentMoniker": "C:\\Users\\Nick\\Documents\\NBD_Project\\NBD_Project\\BookingWepApp\\Areas\\Identity\\Pages\\_ValidationScriptsPartial.cshtml",
+              "RelativeDocumentMoniker": "BookingWepApp\\Areas\\Identity\\Pages\\_ValidationScriptsPartial.cshtml",
+              "ToolTip": "C:\\Users\\Nick\\Documents\\NBD_Project\\NBD_Project\\BookingWepApp\\Areas\\Identity\\Pages\\_ValidationScriptsPartial.cshtml",
+              "RelativeToolTip": "BookingWepApp\\Areas\\Identity\\Pages\\_ValidationScriptsPartial.cshtml",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-01-20T11:38:00.485Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 7,
+              "Title": "_Layout.cshtml",
+              "DocumentMoniker": "C:\\Users\\Nick\\Documents\\NBD_Project\\NBD_Project\\BookingWepApp\\Views\\Shared\\_Layout.cshtml",
+              "RelativeDocumentMoniker": "BookingWepApp\\Views\\Shared\\_Layout.cshtml",
+              "ToolTip": "C:\\Users\\Nick\\Documents\\NBD_Project\\NBD_Project\\BookingWepApp\\Views\\Shared\\_Layout.cshtml",
+              "RelativeToolTip": "BookingWepApp\\Views\\Shared\\_Layout.cshtml",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAC8AAAAHAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2024-12-18T17:15:35.178Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 12,
+              "Title": "Login.cshtml.cs",
+              "DocumentMoniker": "C:\\Users\\Nick\\Documents\\NBD_Project\\NBD_Project\\BookingWepApp\\Areas\\Identity\\Pages\\Account\\Login.cshtml.cs",
+              "RelativeDocumentMoniker": "BookingWepApp\\Areas\\Identity\\Pages\\Account\\Login.cshtml.cs",
+              "ToolTip": "C:\\Users\\Nick\\Documents\\NBD_Project\\NBD_Project\\BookingWepApp\\Areas\\Identity\\Pages\\Account\\Login.cshtml.cs",
+              "RelativeToolTip": "BookingWepApp\\Areas\\Identity\\Pages\\Account\\Login.cshtml.cs",
+              "ViewState": "AQIAADkAAAAAAAAAAAAIwAAAAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-01-20T11:37:54.776Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 13,
+              "Title": "Login.cshtml",
+              "DocumentMoniker": "C:\\Users\\Nick\\Documents\\NBD_Project\\NBD_Project\\BookingWepApp\\Areas\\Identity\\Pages\\Account\\Login.cshtml",
+              "RelativeDocumentMoniker": "BookingWepApp\\Areas\\Identity\\Pages\\Account\\Login.cshtml",
+              "ToolTip": "C:\\Users\\Nick\\Documents\\NBD_Project\\NBD_Project\\BookingWepApp\\Areas\\Identity\\Pages\\Account\\Login.cshtml",
+              "RelativeToolTip": "BookingWepApp\\Areas\\Identity\\Pages\\Account\\Login.cshtml",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-01-20T11:37:51.286Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 14,
+              "Title": "_ViewImports.cshtml",
+              "DocumentMoniker": "C:\\Users\\Nick\\Documents\\NBD_Project\\NBD_Project\\BookingWepApp\\Areas\\Identity\\Pages\\Account\\_ViewImports.cshtml",
+              "RelativeDocumentMoniker": "BookingWepApp\\Areas\\Identity\\Pages\\Account\\_ViewImports.cshtml",
+              "ToolTip": "C:\\Users\\Nick\\Documents\\NBD_Project\\NBD_Project\\BookingWepApp\\Areas\\Identity\\Pages\\Account\\_ViewImports.cshtml",
+              "RelativeToolTip": "BookingWepApp\\Areas\\Identity\\Pages\\Account\\_ViewImports.cshtml",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-01-20T11:37:49.569Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 15,
+              "Title": "_StatusMessage.cshtml",
+              "DocumentMoniker": "C:\\Users\\Nick\\Documents\\NBD_Project\\NBD_Project\\BookingWepApp\\Areas\\Identity\\Pages\\Account\\_StatusMessage.cshtml",
+              "RelativeDocumentMoniker": "BookingWepApp\\Areas\\Identity\\Pages\\Account\\_StatusMessage.cshtml",
+              "ToolTip": "C:\\Users\\Nick\\Documents\\NBD_Project\\NBD_Project\\BookingWepApp\\Areas\\Identity\\Pages\\Account\\_StatusMessage.cshtml",
+              "RelativeToolTip": "BookingWepApp\\Areas\\Identity\\Pages\\Account\\_StatusMessage.cshtml",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-01-20T11:37:47.818Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 16,
+              "Title": "ManageNavPages.cs",
+              "DocumentMoniker": "C:\\Users\\Nick\\Documents\\NBD_Project\\NBD_Project\\BookingWepApp\\Areas\\Identity\\Pages\\Account\\Manage\\ManageNavPages.cs",
+              "RelativeDocumentMoniker": "BookingWepApp\\Areas\\Identity\\Pages\\Account\\Manage\\ManageNavPages.cs",
+              "ToolTip": "C:\\Users\\Nick\\Documents\\NBD_Project\\NBD_Project\\BookingWepApp\\Areas\\Identity\\Pages\\Account\\Manage\\ManageNavPages.cs",
+              "RelativeToolTip": "BookingWepApp\\Areas\\Identity\\Pages\\Account\\Manage\\ManageNavPages.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-01-20T11:37:44.212Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 17,
+              "Title": "Index.cshtml.cs",
+              "DocumentMoniker": "C:\\Users\\Nick\\Documents\\NBD_Project\\NBD_Project\\BookingWepApp\\Areas\\Identity\\Pages\\Account\\Manage\\Index.cshtml.cs",
+              "RelativeDocumentMoniker": "BookingWepApp\\Areas\\Identity\\Pages\\Account\\Manage\\Index.cshtml.cs",
+              "ToolTip": "C:\\Users\\Nick\\Documents\\NBD_Project\\NBD_Project\\BookingWepApp\\Areas\\Identity\\Pages\\Account\\Manage\\Index.cshtml.cs",
+              "RelativeToolTip": "BookingWepApp\\Areas\\Identity\\Pages\\Account\\Manage\\Index.cshtml.cs",
+              "ViewState": "AQIAAHUAAAAAAAAAAAAAAAAAAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-01-20T11:37:23.119Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 18,
+              "Title": "Index.cshtml",
+              "DocumentMoniker": "C:\\Users\\Nick\\Documents\\NBD_Project\\NBD_Project\\BookingWepApp\\Areas\\Identity\\Pages\\Account\\Manage\\Index.cshtml",
+              "RelativeDocumentMoniker": "BookingWepApp\\Areas\\Identity\\Pages\\Account\\Manage\\Index.cshtml",
+              "ToolTip": "C:\\Users\\Nick\\Documents\\NBD_Project\\NBD_Project\\BookingWepApp\\Areas\\Identity\\Pages\\Account\\Manage\\Index.cshtml",
+              "RelativeToolTip": "BookingWepApp\\Areas\\Identity\\Pages\\Account\\Manage\\Index.cshtml",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-01-20T11:37:07.951Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 19,
+              "Title": "_ViewImports.cshtml",
+              "DocumentMoniker": "C:\\Users\\Nick\\Documents\\NBD_Project\\NBD_Project\\BookingWepApp\\Areas\\Identity\\Pages\\Account\\Manage\\_ViewImports.cshtml",
+              "RelativeDocumentMoniker": "BookingWepApp\\Areas\\Identity\\Pages\\Account\\Manage\\_ViewImports.cshtml",
+              "ToolTip": "C:\\Users\\Nick\\Documents\\NBD_Project\\NBD_Project\\BookingWepApp\\Areas\\Identity\\Pages\\Account\\Manage\\_ViewImports.cshtml",
+              "RelativeToolTip": "BookingWepApp\\Areas\\Identity\\Pages\\Account\\Manage\\_ViewImports.cshtml",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-01-20T11:37:06.221Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 20,
+              "Title": "_StatusMessage.cshtml",
+              "DocumentMoniker": "C:\\Users\\Nick\\Documents\\NBD_Project\\NBD_Project\\BookingWepApp\\Areas\\Identity\\Pages\\Account\\Manage\\_StatusMessage.cshtml",
+              "RelativeDocumentMoniker": "BookingWepApp\\Areas\\Identity\\Pages\\Account\\Manage\\_StatusMessage.cshtml",
+              "ToolTip": "C:\\Users\\Nick\\Documents\\NBD_Project\\NBD_Project\\BookingWepApp\\Areas\\Identity\\Pages\\Account\\Manage\\_StatusMessage.cshtml",
+              "RelativeToolTip": "BookingWepApp\\Areas\\Identity\\Pages\\Account\\Manage\\_StatusMessage.cshtml",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-01-20T11:37:04.453Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 21,
+              "Title": "_ManageNav.cshtml",
+              "DocumentMoniker": "C:\\Users\\Nick\\Documents\\NBD_Project\\NBD_Project\\BookingWepApp\\Areas\\Identity\\Pages\\Account\\Manage\\_ManageNav.cshtml",
+              "RelativeDocumentMoniker": "BookingWepApp\\Areas\\Identity\\Pages\\Account\\Manage\\_ManageNav.cshtml",
+              "ToolTip": "C:\\Users\\Nick\\Documents\\NBD_Project\\NBD_Project\\BookingWepApp\\Areas\\Identity\\Pages\\Account\\Manage\\_ManageNav.cshtml",
+              "RelativeToolTip": "BookingWepApp\\Areas\\Identity\\Pages\\Account\\Manage\\_ManageNav.cshtml",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-01-20T11:36:58.133Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 22,
+              "Title": "_Layout.cshtml",
+              "DocumentMoniker": "C:\\Users\\Nick\\Documents\\NBD_Project\\NBD_Project\\BookingWepApp\\Areas\\Identity\\Pages\\Account\\Manage\\_Layout.cshtml",
+              "RelativeDocumentMoniker": "BookingWepApp\\Areas\\Identity\\Pages\\Account\\Manage\\_Layout.cshtml",
+              "ToolTip": "C:\\Users\\Nick\\Documents\\NBD_Project\\NBD_Project\\BookingWepApp\\Areas\\Identity\\Pages\\Account\\Manage\\_Layout.cshtml",
+              "RelativeToolTip": "BookingWepApp\\Areas\\Identity\\Pages\\Account\\Manage\\_Layout.cshtml",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-01-20T11:36:55.011Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 23,
               "Title": "appsettings.json",
               "DocumentMoniker": "C:\\Users\\Nick\\Documents\\NBD_Project\\NBD_Project\\BookingWepApp\\appsettings.json",
               "RelativeDocumentMoniker": "BookingWepApp\\appsettings.json",
@@ -111,7 +494,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 1,
+              "DocumentIndex": 24,
               "Title": "appsettings.Development.json",
               "DocumentMoniker": "C:\\Users\\Nick\\Documents\\NBD_Project\\NBD_Project\\BookingWepApp\\appsettings.Development.json",
               "RelativeDocumentMoniker": "BookingWepApp\\appsettings.Development.json",
@@ -119,25 +502,11 @@
               "RelativeToolTip": "BookingWepApp\\appsettings.Development.json",
               "ViewState": "AQIAAAAAAAAAAAAAAAAAABIAAAAAAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001642|",
-              "WhenOpened": "2025-01-07T13:05:49.481Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-01-07T13:05:49.481Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 3,
-              "Title": "_Layout.cshtml",
-              "DocumentMoniker": "C:\\Users\\Nick\\Documents\\NBD_Project\\NBD_Project\\BookingWepApp\\Views\\Shared\\_Layout.cshtml",
-              "RelativeDocumentMoniker": "BookingWepApp\\Views\\Shared\\_Layout.cshtml",
-              "ToolTip": "C:\\Users\\Nick\\Documents\\NBD_Project\\NBD_Project\\BookingWepApp\\Views\\Shared\\_Layout.cshtml",
-              "RelativeToolTip": "BookingWepApp\\Views\\Shared\\_Layout.cshtml",
-              "ViewState": "AQIAAAYAAAAAAAAAAAAAAB8AAAAAAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2024-12-18T17:15:35.178Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 6,
+              "DocumentIndex": 27,
               "Title": "MongoUserStore.cs",
               "DocumentMoniker": "C:\\Users\\Nick\\Documents\\NBD_Project\\NBD_Project\\BookingWepApp\\MongoUserStore.cs",
               "RelativeDocumentMoniker": "BookingWepApp\\MongoUserStore.cs",
@@ -149,20 +518,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 2,
-              "Title": "MongoDbContext.cs",
-              "DocumentMoniker": "C:\\Users\\Nick\\Documents\\NBD_Project\\NBD_Project\\BookingWepApp\\Data\\MongoDbContext.cs",
-              "RelativeDocumentMoniker": "BookingWepApp\\Data\\MongoDbContext.cs",
-              "ToolTip": "C:\\Users\\Nick\\Documents\\NBD_Project\\NBD_Project\\BookingWepApp\\Data\\MongoDbContext.cs",
-              "RelativeToolTip": "BookingWepApp\\Data\\MongoDbContext.cs",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAABQAAAANAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-12-18T10:09:46.65Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 5,
+              "DocumentIndex": 26,
               "Title": "Booking.cs",
               "DocumentMoniker": "C:\\Users\\Nick\\Documents\\NBD_Project\\NBD_Project\\BookingWepApp\\Models\\Booking.cs",
               "RelativeDocumentMoniker": "BookingWepApp\\Models\\Booking.cs",
@@ -174,7 +530,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 4,
+              "DocumentIndex": 25,
               "Title": "Room.cs",
               "DocumentMoniker": "C:\\Users\\Nick\\Documents\\NBD_Project\\NBD_Project\\BookingWepApp\\Models\\Room.cs",
               "RelativeDocumentMoniker": "BookingWepApp\\Models\\Room.cs",
@@ -186,7 +542,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 7,
+              "DocumentIndex": 28,
               "Title": "MongoRoleStore.cs",
               "DocumentMoniker": "C:\\Users\\Nick\\Documents\\NBD_Project\\NBD_Project\\BookingWepApp\\MongoRoleStore.cs",
               "RelativeDocumentMoniker": "BookingWepApp\\MongoRoleStore.cs",

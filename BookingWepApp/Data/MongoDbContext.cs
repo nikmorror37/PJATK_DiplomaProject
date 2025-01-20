@@ -45,8 +45,8 @@ namespace BookingWepApp.Data
         public void SeedData()
         {
             // Clear existing data from collections
-            //Rooms.DeleteMany(Builders<Room>.Filter.Empty); // Clears the Rooms collection
-            //Hotels.DeleteMany(Builders<Hotel>.Filter.Empty); // Clears the Hotels collection, if needed
+            Rooms.DeleteMany(Builders<Room>.Filter.Empty); // Clears the Rooms collection
+            Hotels.DeleteMany(Builders<Hotel>.Filter.Empty); // Clears the Hotels collection, if needed
 
             // Проверяем, если коллекция Rooms пуста
             if (Rooms.EstimatedDocumentCount() == 0)
